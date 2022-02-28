@@ -2,6 +2,40 @@
 
 
 ----------------------------------------------------------
+# 2021
+
+----------------------------------------------------------
+## January 18, 2021
+
+**Mathematics, Discrete Mathematics**
+- Theorem logic, logical reasoning and mathematical argumentation
+- Equivalence relations, partitions
+- Elementary number theory, divisibility, Euclid's algorithm, recursion, modular calculus
+- Combinatorics
+- Introduction to the complexity of algorithms
+- Initial graph theory, e.g. simple graphs and elementary graph theoretical connections, trees and applications and digraphs.
+- Some graph theoretical algorithms such as exciting trees and shortest paths.
+
+**Introduction to Operating System**
+- Basic concepts and history
+- Construction and structure
+- Processes and threads 
+- Pseudo-parallel execution algorithms
+- Memory management with virtual memory
+- Communication with input and output units, file system
+- Interrupt management
+- Interprocess communication
+- Synchronization mechanisms
+
+**Thoughts**
+This was a pretty challenging course but at the same time so much fun.
+Apart from learning the ins and outs of computer hardware I also learned some scripting in both Linux and Windows.
+
+**Link to work**
+[Readers writers problem in python](keep-learning/operating-systems/2021/readers-writers-threads.py)
+[Batch & shell scriipting](keep-learning/operating-systems/2021/scripting)
+
+----------------------------------------------------------
 # 2020
 
 ----------------------------------------------------------

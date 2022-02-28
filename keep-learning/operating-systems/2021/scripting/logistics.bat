@@ -1,12 +1,10 @@
 @REM Filnamn: logistics.bat
-@REM Skrivet av: Nordin Suleimani
-@REM Dator: Denna script har skapats på egen dator med windows 10 operativ system.
-@REM Skapat datum: 2021-02-18
-@REM Senast ändrat: 2021-03-04
-@REM Kurs: Operativsystem introduktionskurs
-@REM Handledare: Jimmy åhlander
-@REM Beskrivning: En batch script som med både interactivt- och batchläge ger användaren möjligheten att sortera, 
-@REM printa samt göra en backup på en datafil med 6 kolumner.
+@REM By: Nordin Suleimani
+@REM Created: 2021-02-18
+@REM Changed: 2021-03-04
+@REM Course: Introduction to Operating System
+@REM Description: A batch script that with both interactively and in batch mode gives the user the ability to sort,
+@REM print and make a backup of a data file with 6 columns.
 
 @ECHO off
 @CHCP 1252 > nul
@@ -143,17 +141,17 @@ exit /B 0
 @REM Help message, go back to menu when running interactive
 :ShowHelpMSG
     ECHO.
-    ECHO. Används för logistikhantering.
+    ECHO. Anvï¿½nds fï¿½r logistikhantering.
     ECHO.
-    ECHO. Syntax: logistics [enhet:] sökväg [/backup ^| /print ^| /sort ^< i ^| n ^| v ^| l ^| b ^| h ^>]
+    ECHO. Syntax: logistics [enhet:] sï¿½kvï¿½g [/backup ^| /print ^| /sort ^< i ^| n ^| v ^| l ^| b ^| h ^>]
     ECHO.
-    ECHO. /backup   Genererar en säkerhetskopia av datafilen i samma katalog.
-    ECHO. /print    Skriver ut innehållet i datafilen.
-    ECHO. /sort     Sorterar och skriver ut innehållet i datafilen.
+    ECHO. /backup   Genererar en sï¿½kerhetskopia av datafilen i samma katalog.
+    ECHO. /print    Skriver ut innehï¿½llet i datafilen.
+    ECHO. /sort     Sorterar och skriver ut innehï¿½llet i datafilen.
     ECHO.               i  efter produktnummer     n efter namn
-    ECHO.               v  efter vikt              l efter längd
-    ECHO.               b  efter bredd             h efter höjd
-    ECHO. /?        Skriver ut den här hjälptexten.
+    ECHO.               v  efter vikt              l efter lï¿½ngd
+    ECHO.               b  efter bredd             h efter hï¿½jd
+    ECHO. /?        Skriver ut den hï¿½r hjï¿½lptexten.
     
     GOTO :IsBatchOrInteractive
 exit /B 0

@@ -1,12 +1,10 @@
 # Filnamn: logistics.sh
-# Skrivet av: Nordin Suleimani
-# Dator: Denna script har skapats på egen dator med windows 10 operativ system.
-# Skapat datum: 2021-02-22
-# Senast ändrat: 2021-03-04
-# Kurs: Operativsystem introduktionskurs
-# Handledare: Jimmy Åhlander
-# Beskrivning: En batch script som med både interactivt- och batchläge ger användaren möjligheten att sortera, 
-# printa samt göra en backup på en datafil med 6 kolumner.
+# By: Nordin Suleimani
+# Created: 2021-02-22
+# Changed: 2021-03-04
+# Course: Operativsystem introduktionskurs
+# Description: A batch script that with both interactively and in batch mode gives the user the ability to sort,
+# print and make a backup of a data file with 6 columns.
 
 #!/bin/bash
 thisScriptName="${0##*/}"

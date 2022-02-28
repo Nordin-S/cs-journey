@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 # Description:  Readers writers problem
-#               Two writers with precedense writing to a variable.
+#               Two writers with precedence writing to a variable.
 #               Three readers trying to read from the variable,
-#               The readers get completly starved if not
+#               The readers get completely starved if not
 #               implementing some kind of que system.
-# Created by:   Nordin Sulemani
+# Created by:   Nordin Suleimani
 # Date:         2021-03-13
 # Mod:          2021-03-13
 
@@ -87,9 +87,4 @@ CreateThreads(wrtrThreadAmount, False)
 for t in threads:
    t.join()
 
-########################################################################################
 ###############################  LESSON LEARNED  #######################################
-#                         --=: Self-Esteem Crushed :=--
-#
-# PS. and threads and more, thanks sifuuu!! :)
-########################################################################################
