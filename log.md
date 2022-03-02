@@ -5,6 +5,44 @@
 # 2021
 
 ----------------------------------------------------------
+## March 22, 2021
+
+**Computer Network**
+- Overview: Briefly about the history, development and standardization of data communication. Different types of data communication protocols. Digitization. Circuit connection and packet switching. Detailed review of the OSI model and TCP / IP model layers. Infrastructure and communication technologies for local area networks (LANs), city networks (MAN) and global networks (WANs). 
+- Physical layer: Different types of signals, attenuation, distortion and interference. Differences between analogue resp. digital signals. The bandwidth and bit rate of the transmission channel. Modulation and coding techniques for digital transmission. Multiplexing. Transmission media. Functions in different types of modems. Broadband access techniques.
+- Data link layer: Framing, error handling, flow control. Local area networks (LAN). Topologies. Multi-access technicians. Ethernet. MAC addresses. Repeaters, hubs, bridges, switches. 
+- Network layer: The IP protocol. IP addressing. Address types. Subnets and subnet masks. ARP. ICMP. DHCP. Router protocol.
+- Transport layer: TCP and UDP protocols. Port numbers and sockets. Traffic jam management.
+- Application layer: Client / server model. DNS. Application protocol. URLs.
+
+**Thoughts**
+This course has been fun and I think it would be beneficial to delve into this even more whenever I can.
+
+**Object Based Programming in C++**
+- Object-oriented terminology: class, members, operations, attributes, objects, instance, inheritance, relationship, message etc.
+- Specification and implementation of classes in C ++ 
+- Overloading operators 
+- Const declarations
+- Abstract data types such as queue, stack and list
+- Dynamic memory allocation 
+- Pointers and its applications 
+- Iterators in the standard library, including the connection to pointers
+- Recursive algorithms
+- Container classes in the standard library
+- Own implementations of sorting and searching algorithms
+- UML diagrams for classes, objects, activities and sequences
+
+**Thoughts**
+We are getting into C++ on a deeper level, and it seems that I am not that bad at it. Got a few compliments from my teacher so that makes me happy :)
+**Link to work**
+
+[Structs, own datatypes and operatoroverloadings](keep-learning/programming-languages/2021/structs)
+
+[Linked lists](keep-learning/programming-languages/2021/linkedlists)
+
+[maze iterative DFS](keep-learning/programming-languages/2021/maze)
+
+----------------------------------------------------------
 ## January 18, 2021
 
 **Mathematics, Discrete Mathematics**
