@@ -70,7 +70,9 @@ This was a pretty challenging course but at the same time so much fun.
 Apart from learning the ins and outs of computer hardware I also learned some scripting in both Linux and Windows.
 
 **Link to work**
+
 [Readers writers problem in python](keep-learning/operating-systems/2021/readers-writers-threads.py)
+
 [Batch & shell scriipting](keep-learning/operating-systems/2021/scripting)
 
 ----------------------------------------------------------
@@ -109,6 +111,7 @@ Apart from learning the ins and outs of computer hardware I also learned some sc
 I always through learning c++ is scary and yes it is but not impossible.
 
 **Link to work**
+
 [C++ exercises](keep-learning/programming-languages/2020/c++)
  
 ----------------------------------------------------------
