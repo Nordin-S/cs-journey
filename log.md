@@ -5,6 +5,44 @@
 # 2021
 
 ----------------------------------------------------------
+## August 30, 2021
+
+**Administration of UNIX-like Systems**
+- The course deals with the skills required to administer a UNIX like
+systems such as basic commands for working and navigating the system,
+modify the operating system kernel, configure and modify a bootloader,
+volume, process and user management.
+- In addition to knowledge about the use of a UNIX-like system, the course deals 
+even with the most common services used in a network, for example CIFS, NFS, email, DNSSEC and firewalls
+ 
+**Thoughts**
+
+I have had a great time diving into UNIX-like systems, even though I Windows has been my primary system for years and 
+years. Using bash has opened a whole new world up for me, I can see my self making Linux my primary system.
+
+**Databases - Modelling and Implementing**
+- Different database systems
+- Basic concepts
+- Three-level architecture
+- Relational model, relational algebra
+- Orientation about object-oriented and the object relation model
+- SQL, both simple and advanced
+- Design of relational database and simple object relation databases using SQL
+- Entity Relationship Models (ER)
+- Extended Entity-Relationship (EER)
+- Unified Modeling Language (UML)
+- Normalization and functional dependencies
+- Conversion of conceptual model to database schema
+- Databases in Client / Server environment
+- Transfer of an existing database from one environment to another
+- Simple database programming
+- Security
+ 
+**Thoughts**
+
+I have to say I like building databases, but damn there is so many parts to it.
+
+----------------------------------------------------------
 ## March 22, 2021
 
 **Computer Network**
@@ -16,11 +54,12 @@
 - Application layer: Client / server model. DNS. Application protocol. URLs.
 
 **Thoughts**
+
 This course has been fun and I think it would be beneficial to delve into this even more whenever I can.
 
 **Object Based Programming in C++**
 - Object-oriented terminology: class, members, operations, attributes, objects, instance, inheritance, relationship, message etc.
-- Specification and implementation of classes in C ++ 
+- Specification and implementation of classes in C++ 
 - Overloading operators 
 - Const declarations
 - Abstract data types such as queue, stack and list
@@ -33,7 +72,9 @@ This course has been fun and I think it would be beneficial to delve into this e
 - UML diagrams for classes, objects, activities and sequences
 
 **Thoughts**
+
 We are getting into C++ on a deeper level, and it seems that I am not that bad at it. Got a few compliments from my teacher so that makes me happy :)
+
 **Link to work**
 
 [Structs, own datatypes and operatoroverloadings](keep-learning/programming-languages/2021/structs)
@@ -66,6 +107,7 @@ We are getting into C++ on a deeper level, and it seems that I am not that bad a
 - Synchronization mechanisms
 
 **Thoughts**
+
 This was a pretty challenging course but at the same time so much fun.
 Apart from learning the ins and outs of computer hardware I also learned some scripting in both Linux and Windows.
 
@@ -92,7 +134,8 @@ Apart from learning the ins and outs of computer hardware I also learned some sc
 - Polynomial: the factor theorem, polynomial division.
 - 
 **Thoughts**
-- I had a real hard time to keep up with math, has been a while. 
+
+I had a real hard time to keep up with math, has been a while. 
  
 **Introduction to Programming**
 - Design simpler C ++ programs based on procedural programming.
@@ -108,6 +151,7 @@ Apart from learning the ins and outs of computer hardware I also learned some sc
 - Write simple building scripts.
 
 **Thoughts**
+
 I always through learning c++ is scary and yes it is but not impossible.
 
 **Link to work**
@@ -157,12 +201,15 @@ Have been thinking of getting into Computer Science for some time now, so I'm pr
         - Ut semper consequat imperdiet
 
 **Thoughts**: 
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a aliquet sem, id porta lacus. Nam ac orci vitae orci facilisis consequat sit amet id nibh. Suspendisse sit amet rhoncus velit. Praesent vestibulum vel diam sed convallis. Nunc non urna ut diam aliquam viverra vel nec arcu. In pretium ultrices augue, sit amet bibendum purus pharetra sed. Nunc luctus diam ut est laoreet molestie. Suspendisse eget sagittis diam. Ut semper consequat imperdiet. 
 
 **Link to work**:
+
 - [Link to work](https://github.com/)
 
 **Resources**
+
 - [Link to resource](https://github.com/)
 ----------------------------------------------------------
 
