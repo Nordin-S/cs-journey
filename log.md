@@ -5,6 +5,32 @@
 # 2021
 
 ----------------------------------------------------------
+## November 01, 2021
+
+**Embedded System for Internet of Things**
+- Apply Ohm's law and calculate power requirements of simpler electrical circuits
+- Identify and use active and passive components in an Internet of Things system
+- Identify, describe and explain different types of architectures suitable for the Internet of Things
+- Explain how ordinary sensors work and be able to apply these in a built-in system
+- Apply standard protocols for communication between sensors and built-in system
+- Apply standard protocols for communication between embedded systems and Cloud / middleware
+- Design simpler Internet of Things systems and implement it in a built-in system
+- Identify security needs for Internet of Things systems
+ 
+**Thoughts**
+
+This course is by far one of my favorites. Got my self some IoT devices and surrounding accessories, will be playing around with them when possible.
+
+**Mathematical Statistics and Linear Algebra**
+- Know basic concepts and be able to solve problems in probability theory
+- Master basic descriptive statistics including the most common position and spread measurements
+- Ability to perform calculations with stochastic variables and be familiar with some of the most common distributions
+- Ability to perform point and interval estimation
+- Ability to solve simple geometric problems in the plane and space
+- Ability to solve linear systems of equations
+- Ability to perform simple calculations with matrices and calculate determinants
+
+----------------------------------------------------------
 ## August 30, 2021
 
 **Administration of UNIX-like Systems**
@@ -17,7 +43,7 @@ even with the most common services used in a network, for example CIFS, NFS, ema
  
 **Thoughts**
 
-I have had a great time diving into UNIX-like systems, even though I Windows has been my primary system for years and 
+I have had a great time diving into UNIX-like systems, even though Windows has been my primary system for years and 
 years. Using bash has opened a whole new world up for me, I can see my self making Linux my primary system.
 
 **Databases - Modelling and Implementing**
