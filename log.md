@@ -46,6 +46,11 @@ I had fun learning Java, and I'll be learning more as I go since it feels to me 
 
 During this course I came to use Intellij IDEA extensively, even thought I've been using VS Code for much longer period, and I will be continuing using VS code I find that Intellij IDEA has me on the hook. While using Intellij IDEA I came across ideavim, and now I would not imagine going back to my old workflow. Who knows maybe I get Vim/Neovim under the belt some day too.
 
+
+**Link to work**
+
+[Course assignments](keep-learning/programming-languages/2022/java)
+
 ----------------------------------------------------------
 # 2021
 
