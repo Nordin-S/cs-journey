@@ -1,0 +1,318 @@
+0
+  Män      61240
+  Kvinnor  57806
+1
+  Män      61396
+  Kvinnor  58199
+2
+  Män      61415
+  Kvinnor  58312
+3
+  Män      61409
+  Kvinnor  58287
+4
+  Män      61342
+  Kvinnor  58228
+5
+  Män      61225
+  Kvinnor  58165
+6
+  Män      61086
+  Kvinnor  58056
+7
+  Män      60952
+  Kvinnor  57952
+8
+  Män      60837
+  Kvinnor  57837
+9
+  Män      60723
+  Kvinnor  57735
+10
+  Män      60605
+  Kvinnor  57620
+11
+  Män      60509
+  Kvinnor  57513
+12
+  Män      60431
+  Kvinnor  57427
+13
+  Män      60373
+  Kvinnor  57353
+14
+  Män      60339
+  Kvinnor  57308
+15
+  Män      60374
+  Kvinnor  57312
+16
+  Män      60458
+  Kvinnor  57374
+17
+  Män      60645
+  Kvinnor  57571
+18
+  Män      60887
+  Kvinnor  57985
+19
+  Män      61109
+  Kvinnor  58294
+20
+  Män      61410
+  Kvinnor  58819
+21
+  Män      61822
+  Kvinnor  59473
+22
+  Män      62441
+  Kvinnor  60261
+23
+  Män      63251
+  Kvinnor  61191
+24
+  Män      64201
+  Kvinnor  62163
+25
+  Män      65131
+  Kvinnor  63081
+26
+  Män      65950
+  Kvinnor  63896
+27
+  Män      66627
+  Kvinnor  64551
+28
+  Män      67095
+  Kvinnor  65013
+29
+  Män      67396
+  Kvinnor  65311
+30
+  Män      67527
+  Kvinnor  65478
+31
+  Män      67517
+  Kvinnor  65507
+32
+  Män      67382
+  Kvinnor  65436
+33
+  Män      67169
+  Kvinnor  65255
+34
+  Män      66890
+  Kvinnor  65033
+35
+  Män      66566
+  Kvinnor  64773
+36
+  Män      66208
+  Kvinnor  64523
+37
+  Män      65868
+  Kvinnor  64270
+38
+  Män      65500
+  Kvinnor  63995
+39
+  Män      65306
+  Kvinnor  63898
+40
+  Män      64961
+  Kvinnor  63686
+41
+  Män      64603
+  Kvinnor  63451
+42
+  Män      64276
+  Kvinnor  63239
+43
+  Män      63895
+  Kvinnor  62981
+44
+  Män      63444
+  Kvinnor  62634
+45
+  Män      63088
+  Kvinnor  62409
+46
+  Män      63080
+  Kvinnor  62413
+47
+  Män      62176
+  Kvinnor  61683
+48
+  Män      60487
+  Kvinnor  60486
+49
+  Män      58555
+  Kvinnor  58447
+50
+  Män      58034
+  Kvinnor  57967
+51
+  Män      56670
+  Kvinnor  57165
+52
+  Män      57077
+  Kvinnor  57032
+53
+  Män      56990
+  Kvinnor  57342
+54
+  Män      58484
+  Kvinnor  59206
+55
+  Män      61779
+  Kvinnor  61838
+56
+  Män      64803
+  Kvinnor  65410
+57
+  Män      66607
+  Kvinnor  67047
+58
+  Män      68772
+  Kvinnor  68541
+59
+  Män      69221
+  Kvinnor  68939
+60
+  Män      68944
+  Kvinnor  69176
+61
+  Män      65495
+  Kvinnor  65720
+62
+  Män      63648
+  Kvinnor  63840
+63
+  Män      59720
+  Kvinnor  60973
+64
+  Män      58417
+  Kvinnor  59233
+65
+  Män      56581
+  Kvinnor  57431
+66
+  Män      54094
+  Kvinnor  55175
+67
+  Män      52630
+  Kvinnor  53800
+68
+  Män      52297
+  Kvinnor  53622
+69
+  Män      51638
+  Kvinnor  53448
+70
+  Män      52082
+  Kvinnor  53804
+71
+  Män      50603
+  Kvinnor  52615
+72
+  Män      48441
+  Kvinnor  50595
+73
+  Män      48571
+  Kvinnor  50535
+74
+  Män      48328
+  Kvinnor  50647
+75
+  Män      48998
+  Kvinnor  51797
+76
+  Män      49990
+  Kvinnor  53027
+77
+  Män      48259
+  Kvinnor  51640
+78
+  Män      47517
+  Kvinnor  51096
+79
+  Män      46352
+  Kvinnor  50044
+80
+  Män      43036
+  Kvinnor  47382
+81
+  Män      40852
+  Kvinnor  45089
+82
+  Män      40235
+  Kvinnor  45457
+83
+  Män      40141
+  Kvinnor  45643
+84
+  Män      37646
+  Kvinnor  43938
+85
+  Män      34540
+  Kvinnor  41558
+86
+  Män      31026
+  Kvinnor  38922
+87
+  Män      25782
+  Kvinnor  33137
+88
+  Män      21274
+  Kvinnor  28784
+89
+  Män      17545
+  Kvinnor  24855
+90
+  Män      14171
+  Kvinnor  21393
+91
+  Män      11652
+  Kvinnor  18350
+92
+  Män       9086
+  Kvinnor  15356
+93
+  Män       6944
+  Kvinnor  12781
+94
+  Män       5218
+  Kvinnor  10124
+95
+  Män       3653
+  Kvinnor   7860
+96
+  Män       2468
+  Kvinnor   5822
+97
+  Män       1690
+  Kvinnor   4368
+98
+  Män       1079
+  Kvinnor   3092
+99
+  Män        668
+  Kvinnor   2119
+100
+  Män        425
+  Kvinnor   1488
+101
+  Män        257
+  Kvinnor   1018
+102
+  Män        150
+  Kvinnor    666
+103
+  Män         82
+  Kvinnor    407
+104
+  Män         42
+  Kvinnor    239
+105
+  Män         38
+  Kvinnor    259
