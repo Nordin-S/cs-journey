@@ -2,6 +2,51 @@
 
 
 ----------------------------------------------------------
+# 2022
+
+----------------------------------------------------------
+## January 17, 2022
+
+**Web Programming**
+- An introduction to basic concepts in computer knowledge and data communication with a focus on http and ftp.
+- Structure and design of web pages and websites
+- Use of tables, frames, layers, forms, etc.
+- Overview of HTML and its standard
+- Validation of HTML documents
+- Concepts and application of style templates, CSS (Cascading Style Sheets)
+- Techniques for positioning, layout and design using style templates
+- Validation of CSS documents
+- An introduction to development with Javascript and support frameworks to be able to create interactive and dynamic websites
+- Server side scripting with PHP
+- Database connections with PHP
+- Communication with relational databases with embedded SQL
+ 
+**Thoughts**
+
+I have had some prior experience in web development in regard to html, css, javascript and php. Have also had some experience with phpBB, joomla and probably like most others some Wordpress too.
+With that said, on this course I have acquainted myself with javascript on the basis of using promises/async/callbacks with API calls. As for PHP we have delved into OOP, I used this opportunity to learn about MVC and create a simple solution to some of my assignments with MVC pattern in mind.
+
+**Java I**
+- Basic software development concepts such as compilation and execution.
+- Basic algorithmic concepts for problem-solving such as abstraction level, control set, data and method.
+- Java The SDK tools javac, java, javaw, and jar with associated arguments and environmental parameters. Javadoc with accompanying comment syntax.
+- Primitive data types, declarations of primitive types and governance statements. Implicit and explicit type conversions.
+- String class, declaration method and use.
+- User dialogs via System.out and System.in. Conversions from text to speech form. printf syntax.
+- Methods in the class Math. Static versus instance-bound methods. How to interpret the API documentation for the classes String, Math, BufferedReader and PrintStream in particular.
+- Own methods. How to divide programs into methods. When and why are non-static methods declared. Why is main() static. The class definition.
+- Superclass Object. Overloading Object.toString().
+- Arrays of primitive types. Semantic differences between reference variables and value variables. In particular with regard to allocations and as methodological arguments.
+- Algorithmic description of any simple sorting method and Collections.sort
+- ArrayList without observing the Collection hierarchy.
+ 
+**Thoughts**
+
+I had fun learning Java, and I'll be learning more as I go since it feels to me that it is a very good language to have it in the tool box.
+
+During this course I came to use Intellij IDEA extensively, even thought I've been using VS Code for much longer period, and I will be continuing using VS code I find that Intellij IDEA has me on the hook. While using Intellij IDEA I came across ideavim, and now I would not imagine going back to my old workflow. Who knows maybe I get Vim/Neovim under the belt some day too.
+
+----------------------------------------------------------
 # 2021
 
 ----------------------------------------------------------
