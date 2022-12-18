@@ -1,0 +1,6 @@
+1. Vilka kontruerare och destruerare körs vi körning av f(int_buffer buf)
+  explicit int_buffer(size_t size);
+2. Rätt version av begin och end
+  I båda fallen körs int *begin() och int *int end()
+3. Kan man använda range for syntaxen
+  Ja det funkar fint
