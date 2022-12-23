@@ -1,0 +1,5 @@
+
+o	cpp:S5018"ZEnsure that the move constructor of "MailBox" is exception-free and declare it "noexcept".(‹ížñ
+s	cpp:S3624"^Explicitly define or delete the missing destructor so that it will not be implicitly provided.(ÁœìÅ
+y	cpp:S4963"dRemove this class' copy constructor and move constructor so that the class follows the rule of Zero.(ÁœìÅ
+D	cpp:S1709"/Add the "explicit" keyword to this constructor.(¾‚Û®

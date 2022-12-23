@@ -1,0 +1,11 @@
+
+8
+main.cpp,6\8\682a50d19e416195436708e48c7761923b8d6651
+7
+Email.h,f\3\f37ae8326cf2854cb3ba6b65909a4bceab354748
+;
+MailBox.cpp,6\6\66a7388b3c791f719b2b3489c9b9f3fbf3f06e6d
+9
+	MailBox.h,8\a\8a499aa0fe9d0bf9fa1dae60658d8fc0eedbae3e
+9
+	Email.cpp,b\4\b43b32f126049fa5f49f08e71c4ed58c10f27a21
