@@ -8,7 +8,7 @@
 #include <vector>
 
 namespace doa_laboration02 {
-// Function to perform insertion sort
+  // Function to perform insertion sort
   void insertion_sort(std::vector<int> &arr) {
     int n = arr.size();
     for (int i = 1; i < n; i++) {
@@ -23,7 +23,7 @@ namespace doa_laboration02 {
     }
   }
 
-// Function to perform selection sort
+  // Function to perform selection sort
   void selection_sort(std::vector<int> &arr) {
     int n = arr.size();
     for (int i = 0; i < n - 1; i++) {
@@ -37,30 +37,39 @@ namespace doa_laboration02 {
     }
   }
 
-// Quick sort using a right pivot
-  void quick_sort_right_pivot(std::vector<int> &arr, int left = 0, int right = -1) {
-    if (left < right) {
-      int pivot = arr[right];
-      int i = left - 1;
-      for (int j = left; j <= right - 1; j++) {
-        if (arr[j] <= pivot) {
-          i++;
-          std::swap(arr[i], arr[j]);
-        }
+// quick sort partition
+  int partition(std::vector<int> &arr, int left, int right) {
+    int pivot = arr[right];
+    int i = left - 1;
+    for (int j = left; j < right; j++) {
+      if (arr[j] < pivot) {
+        i++;
+        std::swap(arr[i], arr[j]);
       }
-      std::swap(arr[i + 1], arr[right]);
-      int partition_index = i + 1;
-      quick_sort_right_pivot(arr, left, partition_index - 1);
-      quick_sort_right_pivot(arr, partition_index + 1, right);
     }
+    std::swap(arr[i + 1], arr[right]);
+    return i + 1;
   }
+
+// Quick sort using a right pivot
+  void quick_sort_right_pivot(std::vector<int> &arr, int left, int right) {
+    // Add base case for arrays with fewer than two elements
+    if (left >= right) {
+      return;
+    }
+
+    int pivot = partition(arr, left, right);
+    quick_sort_right_pivot(arr, left, pivot - 1);
+    quick_sort_right_pivot(arr, pivot + 1, right);
+  }
+
 // Quick sort using a right pivot with one parameter to fit signature
   void quick_sort_right_pivot(std::vector<int> &arr) {
     quick_sort_right_pivot(arr, 0, arr.size() - 1);
   }
 
-// Quick sort middle of three pivot
-  void quick_sort_mot_pivot(std::vector<int> &arr, int left = 0, int right = -1) {
+  // Quick sort middle of three pivot
+  void quick_sort_mot_pivot(std::vector<int> &arr, int left, int right) {
     if (left < right) {
       int mid = left + (right - left) / 2;
       int pivot = arr[mid];
@@ -96,9 +105,14 @@ namespace doa_laboration02 {
       quick_sort_mot_pivot(arr, partition_index + 1, right);
     }
   }
-// Quick sort using a middle-of-three pivot with one parameter to fit signature
+
+  // Quick sort using a middle-of-three pivot with one parameter to fit signature
   void quick_sort_mot_pivot(std::vector<int> &arr) {
     quick_sort_mot_pivot(arr, 0, arr.size() - 1);
+  }
+  // Quick sort using a middle-of-three pivot with one parameter to fit signature
+  void stdSort(std::vector<int> &arr) {
+    std::sort(arr.begin(), arr.end());
   }
 } // doa_laboration02
 

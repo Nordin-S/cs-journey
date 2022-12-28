@@ -13,19 +13,17 @@ using namespace doa_laboration02;
 int main() {
   // Set the minimum and maximum size, the step and number of samples
   enum OPTIONS {
-    min_size = 1000, max_size = 10000, step = 1000, num_samples = 5
-  }; // for not sorted data
-//  enum OPTIONS{min_size = 20000, max_size = 200000, step = 20000, num_samples = 5}; // for sorted data
+    min_size = 1000, max_size = 10000, step = 1000, num_samples = 5 // for not sorted data
+//    min_size = 200000, max_size = 2000000, step = 200000, num_samples = 5 // for sorted data
+  };
 
   // Set the data set generation functions
-  std::vector<std::vector<int> (*)(int)> data_funcs{makeDescVector, makeRandomVector};
-  std::vector<std::string> data_names{"DescendingData", "RandomData"};
+  std::vector<std::vector<int> (*)(int)> data_funcs{makeAscVector};
+  std::vector<std::string> data_names{"AscendingData"};
 
   // Set the sorting algorithms
-  std::vector<void (*)(std::vector<int> &)> sort_funcs{insertion_sort, selection_sort, quick_sort_right_pivot,
-                                                       quick_sort_mot_pivot};
-  std::vector<std::string> sort_names{"insertion_sort", "selection_sort", "quick_sort_right_pivot",
-                                      "quick_sort_mot_pivot"};
+  std::vector<void (*)(std::vector<int> &)> sort_funcs{selection_sort};
+  std::vector<std::string> sort_names{"selection_sort"};
 
   // Loop through the data set generation functions
   for (int i = 0; i < data_funcs.size(); i++) {

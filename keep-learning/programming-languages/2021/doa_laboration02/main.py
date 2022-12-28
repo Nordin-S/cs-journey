@@ -5,12 +5,16 @@ import os
 # Set the directory where the CSV files are located
 directory = "cmake-build-debug"
 
-# Loop through the CSV files in the directory
+# # Loop through the CSV files in the directory
 for filename in os.listdir(directory):
     if filename.endswith(".csv"):
         # Read the data from the CSV file
         sizes, times, stddevs, sample_sizes = [], [], [], []
-        with open(os.path.join(directory, filename)) as f:
+        location = "cmake-build-debug/"
+        # filename = "selection_sort_RandomData"
+        # with open(location + filename + ".csv") as f:
+        # open file using os and filename
+        with open(os.path.join(location, filename), 'r') as f:
             for line in f:
                 if line.startswith("#"):
                     continue
@@ -30,7 +34,7 @@ for filename in os.listdir(directory):
 
         # Plot the data
         plt.errorbar(sizes, times, yerr=stddevs, fmt="o", label="Fit Data")
-        plt.plot(sizes_fine, times_fine, label="Fit k N^2")
+        plt.plot(sizes_fine, times_fine, label="Fit ---")
         plt.title(filename)
         plt.xlabel("N elements")
         plt.ylabel("t [ms]")
