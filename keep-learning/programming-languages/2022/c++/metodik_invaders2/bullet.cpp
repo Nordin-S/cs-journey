@@ -1,32 +1,37 @@
 #include <QTimer>
 #include <QGraphicsScene>
-
 #include "bullet.h"
 
 namespace metodik_invaders2 {
-  Bullet::Bullet(settings::BULLET_OWNER ownerType, int bMoveStep,
+  Bullet::Bullet(settings::Faction ownerType, int bMoveStep,
+                 settings::AmmoType ammoType,
+                 settings::AmmoDmgLvl dmgLevel,
                  QObject *parent)
-    : myOwnersType(ownerType), m_bMoveStep(bMoveStep), QObject{parent} {
-    setPixmap(QPixmap(":/resources/lasers/laserBlue05.png"));
+    : myOwnersType(ownerType), m_bMoveStep(bMoveStep), m_ammoType(ammoType),
+      QObject{parent} {
+
+    if (m_ammoType == settings::AmmoType::TypeLaser)
+      setPixmap(QPixmap(settings::ammoLasers[rand() % settings::ammoLasers.size()]));
+    if (m_ammoType == settings::AmmoType::TypeMissile)//TODO: add missile
+      setPixmap(QPixmap(settings::ammoMissiles[rand() % settings::ammoMissiles.size()]));
 
     QTimer *timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(bMoveStep);
-
+    timer->start(bMoveStep / 4);
   }
 
-  settings::BULLET_OWNER Bullet::getOwner() {
+  settings::Faction Bullet::getOwner() {
     return myOwnersType;
   }
 
   void Bullet::move() {
     // player bullet
-    if (myOwnersType == settings::BULLET_OWNER::PLAYER)
-      setPos(x(), y() - static_cast<int>(settings::MOVE_STEPS::MOVE05));
+    if (myOwnersType == settings::Faction::Player)
+      setPos(x(), y() - m_bMoveStep);
 
     // enemy bullet
-    if (myOwnersType == settings::BULLET_OWNER::ENEMY)
-      setPos(x(), y() + static_cast<int>(settings::MOVE_STEPS::MOVE03));
+    if (myOwnersType == settings::Faction::Enemy)
+      setPos(x(), y() + m_bMoveStep);
 
 //    if(pos().y() + pixmap().height() < parentObject()->boundingRect().top() || pos().y() > parentObject()->boundingRect().height()){
 ////        scene()->removeItem(this);

@@ -5,88 +5,150 @@
 #include <vector>
 #include <QList>
 #include <QString>
+#include <map>
+#include <QMap>
 
 namespace metodik_invaders2 {
   namespace settings {
-    enum class HEALTHS {
-      PLAYER_HEALTH = 100,
-      FIGTHER_HEALTH = 50,
-      BOMBER_HEALTH = 250,
-      BOSS_HEALTH = 500
+    enum Healths {
+      PlayerHealth = 100,
+      FighterHealth = 50,
+      BomberHealth = 250,
+      BossHealth = 500
     };
-    enum class SHIP_SPEEDS {
-      PLAYER_SPEED = 60, FIGHTER_SPEED = 20, BOMBER_SPEED = 10, BOSS_SPEED = 10
+    enum ShipSpeeds {
+      PlayerSpeed = 10, FighterSpeed = 8, BomberSpeed = 6, BossSpeed = 4
     };
-    enum class UPDATE_MS {
-      uMS01 = 1,
-      uMS02 = 2,
-      uMS03 = 3,
-      uMS04 = 4,
-      uMS05 = 5,
-      uMS06 = 6,
-      uMS07 = 7,
-      uMS08 = 8,
-      uMS09 = 9,
-      uMS10 = 10,
-      uMS15 = 15,
-      uMS20 = 20,
-      uMS25 = 25,
-      uMS30 = 30,
-      uMS35 = 35,
-      uMS40 = 40,
-      uMS45 = 45,
-      uMS50 = 50
+    enum UpdateMs {
+      UMs01 = 1,
+      UMs02 = 2,
+      UMs03 = 3,
+      UMs04 = 4,
+      UMs05 = 5,
+      UMs06 = 6,
+      UMs07 = 7,
+      UMs08 = 8,
+      UMs09 = 9,
+      UMs10 = 10,
+      UMs15 = 15,
+      UMs20 = 20,
+      UMs25 = 25,
+      UMs30 = 30,
+      UMs35 = 35,
+      UMs40 = 40,
+      UMs45 = 45,
+      UMs50 = 50,
+      UMs60 = 60,
+      UMs70 = 70,
+      UMs80 = 80,
+      UMs90 = 90,
+      UMs100 = 100
+    };
+    enum MoveSteps {
+      Move01 = 1,
+      Move02 = 2,
+      Move03 = 3,
+      Move04 = 4,
+      Move05 = 5,
+      Move06 = 6,
+      Move07 = 7,
+      Move08 = 8,
+      Move09 = 9,
+      Move10 = 10,
+      Move11 = 11,
+      Move12 = 12,
+      Move13 = 13,
+      Move14 = 14,
+      Move15 = 15,
+      Move16 = 16,
+      Move17 = 17,
+      Move18 = 18,
+      Move19 = 19,
+      Move20 = 20,
+      Move30 = 30,
+      Move40 = 40,
+      Move50 = 50,
+      Move60 = 60,
+      Move70 = 70,
+      Move80 = 80,
+      Move90 = 90,
+      Move100 = 100
     };
 
-    enum class BULLET_OWNER {
-      PLAYER, ENEMY
+    enum Faction {
+      Player, Enemy
     };
-    enum class MOVE_STEPS {
-      MOVE01 = 1,
-      MOVE02 = 2,
-      MOVE03 = 3,
-      MOVE04 = 4,
-      MOVE05 = 5,
-      MOVE06 = 6,
-      MOVE07 = 7,
-      MOVE08 = 8,
-      MOVE09 = 9,
-      MOVE10 = 10,
-      MOVE11 = 11,
-      MOVE12 = 12,
-      MOVE13 = 13,
-      MOVE14 = 14,
-      MOVE15 = 15,
-      MOVE16 = 16,
-      MOVE17 = 17,
-      MOVE18 = 18,
-      MOVE19 = 19,
-      MOVE20 = 20
+    enum AmmoType {
+      TypeLaser, TypeMissile
     };
-    enum class AMMO_TYPE {
-      LASER_SMALL, LASER_MEDIUM, LASER_LARGE,
-      MISSILE_SMALL, MISSILE_MEDIUM, MISSILE_LARGE
-    };
-    enum class ENEMY_SHIP_TYPE {
-      FIGHTER, BOMBER, BOSS
+    enum AmmoDmgLvl {
+      Dmg01 = 1,
+      Dmg02,
+      Dmg03,
+      Dmg04,
+      Dmg05,
+      Dmg06,
+      Dmg07,
+      Dmg08,
+      Dmg09,
+      Dmg10
     };
 
+    enum EnemyShipType {
+      Fighter, Bomber, Boss
+    };
 
-    extern QList<QString> PLAYER_SHIP;
+    enum ShipTypes {
+      // player
+      Striker, Enforcer, Fury,
+      // fighter
+      Viper, NightHawk, Sabre, Avenger, Nemesis,
+      //bomber
+      Bombardier, Pummeler, Oblivion, Annihilator,
+      //boss
+      Leviathan, Behemoth, // Colossus, Titan, Apocalypse
+    };
 
-    extern QList<QString> LASER_S;
-    extern QList<QString> LASER_M;
-    extern QList<QString> LASER_L;
+    const std::map<ShipTypes, QString> shipTypes = {
+      //playerships
+      {Striker,     "striker"},
+      {Enforcer,    "enforcer"},
+      {Fury,        "fury"},
+      // fighter ships
+      {Viper,       "viper"},
+      {NightHawk,   "nighthawk"},
+      {Sabre,       "sabre"},
+      {Avenger,     "avenger"},
+      {Nemesis,     "nemesis"},
+      // Bomber ships
+      {Bombardier,  "bombardier"},
+      {Pummeler,    "pummeler"},
+      {Oblivion,    "oblivion"},
+      {Annihilator, "annihilator"},
+      // Boss ships
+      {Leviathan,   "leviathan"},
+      {Behemoth,    "behemoth"},
+    };
 
-    extern QList<QString> MISSILE_S;
-    extern QList<QString> MISSILE_M;
-    extern QList<QString> MISSILE_L;
+    enum AnimationStates {
+      Cruising,
+      Accelerating,
+      Decelerating,
+      Exploding
+    };
+    const std::map<AnimationStates, QString> animationStates = {
+      {Cruising,     "cruising"},
+      {Accelerating, "accelerating"},
+      {Decelerating, "decelerating"},
+      {Exploding,    "exploding"}
+    };
 
+    extern const QList<QString> ammoLasers;
+    extern const QList<QString> ammoMissiles;
 
-    extern QList<QString> ENEMY_FIGHTER_SHIPS;
-    extern QList<QString> ENEMY_BOMBER_SHIPS;
-    extern QList<QString> ENEMY_BOSS_SHIPS;
+    extern QList<QString> getShipAnimation(ShipTypes shipType, AnimationStates animState);
 
+    // TODO: are save player score and get player score needed here?
 //    void savePlayerScore(std::string gameTime, std::string score,
 //                         std::string playerName) {
 //      // save to file row depending on score
@@ -98,6 +160,6 @@ namespace metodik_invaders2 {
 //      // read and return score file
 //      return {};
 //    }
-  } // metodik_invaders2
+  }; // metodik_invaders2
 }
 #endif //METODIK_INVADERS2_SETTINGS// _H

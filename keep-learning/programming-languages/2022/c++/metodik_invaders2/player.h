@@ -1,7 +1,6 @@
 #ifndef METODIK_INVADERS2_PLAYER_H
 #define METODIK_INVADERS2_PLAYER_H
 
-
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QPropertyAnimation>
@@ -13,36 +12,50 @@ namespace metodik_invaders2 {
   Q_OBJECT
     Q_PROPERTY(QPointF pos READ pos WRITE setPos)
   public:
-    Player(int speed = static_cast<int>(settings::SHIP_SPEEDS::PLAYER_SPEED),
-           int health = static_cast<int>(settings::HEALTHS::PLAYER_HEALTH),
-           int fireRate = static_cast<int>(settings::UPDATE_MS::uMS01),
-           int bulletMoveStep = static_cast<int>(settings::MOVE_STEPS::MOVE01),
-           settings::AMMO_TYPE ammoType = settings::AMMO_TYPE::LASER_SMALL,
-           QString playerShip = settings::PLAYER_SHIP[0], QObject *parent = nullptr);
+    Player(int speed = settings::ShipSpeeds::PlayerSpeed,
+           int health = settings::Healths::PlayerHealth,
+           int fireRate = settings::UpdateMs::UMs01,
+           int bulletMoveStep = settings::MoveSteps::Move01,
+           settings::AmmoType ammoType = settings::AmmoType::TypeLaser,
+           settings::AmmoDmgLvl dmgLevel = settings::AmmoDmgLvl::Dmg10,
+           settings::ShipTypes shipType = settings::ShipTypes::Striker,
+           QObject *parent = nullptr);
 
-//    bool event(QEvent *event) override;
-//    void keyPressEvent(QKeyEvent * event) override;
     void setPosition(qreal xPos, qreal yPos);
 
     void startShooting();
 
     void stopShooting();
 
-    void stop();
-
   private:
-    QPropertyAnimation *animation;
-    settings::AMMO_TYPE m_ammoType;
-    QTimer *moveTimer;
+    settings::ShipTypes m_shipType;
+    QList<QString> m_shipCrusingAnims;
+    QList<QString> m_shipAcceleratingAnims;
+    QList<QString> m_shipDeceleratingAnims;
+    QList<QString> m_shipExplodingAnims;
+    settings::AmmoType m_ammoType;
+    settings::AmmoDmgLvl m_dmgLevel;
+    QTimer *updateTimer;
     QTimer *shootTimer;
+    QTimer *animationTimer;
 //    QList<Bullet*> bullets;
     int m_speed;
     int m_health;
     int m_fireRate;
     int m_bulletMoveStep;
     bool isShooting = false;
-    bool isMovingLeft = false;
-    bool isMovingRight = false;
+    int xDirection = 0;
+    int yDirection = 0;
+
+    settings::AnimationStates m_animState = settings::AnimationStates::Cruising;
+
+    int animIndex = 0;
+
+  public:
+    void setDirectionX(int xDirection);
+
+    void setDirectionY(int yDirection);
+    void setShipAnimations(settings::ShipTypes shipType);
 
   public slots:
 
@@ -50,17 +63,11 @@ namespace metodik_invaders2 {
 
     void move();
 
-    void moveLeft();
-
-    void moveRight();
-
-    void stopMoveLeft();
-
-    void stopMoveRight();
-
     void shoot();
 
-    void update();
+    void animateShip();
+
+    void updatePosition();
 
   signals:
 

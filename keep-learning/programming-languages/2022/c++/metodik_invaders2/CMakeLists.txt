@@ -94,25 +94,25 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(metodik_invaders2
-                main.cpp
-                invaders.cpp
-                invaders.h
-                invaders.ui
-                resource.qrc
-                player.h
-                player.cpp
-                bullet.h
-                bullet.cpp
-                enemy.h
-                enemy.cpp
-                game.h
-                game.cpp
-                background.h
-                background.cpp
-#                backgroundmusic.h
-#                backgroundmusic.cpp
-                settings.h
-                settings.cpp
+        settings.h
+        settings.cpp
+        main.cpp
+        invaders.cpp
+        invaders.h
+        invaders.ui
+        resource.qrc
+        player.h
+        player.cpp
+        bullet.h
+        bullet.cpp
+        enemy.h
+        enemy.cpp
+        game.h
+        game.cpp
+        background.h
+        background.cpp
+        backgroundmusic.h
+        backgroundmusic.cpp
         )
 target_link_libraries(metodik_invaders2
         Qt::Core
@@ -121,11 +121,18 @@ target_link_libraries(metodik_invaders2
         Qt::Multimedia
         )
 
-if (WIN32)
+
+if (WIN64)
+
+    # multimedia folder
+    add_subdirectory("${CMAKE_PREFIX_PATH}/plugins/multimedia build/plugins")
+    file(COPY CMAKE_PREFIX_PATH/plugins/multimedia DESTINATION build/plugins)
+
+
     set(DEBUG_SUFFIX)
-#    if (MSVC AND CMAKE_BUILD_TYPE MATCHES "Debug")
-#        set(DEBUG_SUFFIX "d")
-#    endif ()
+    #    if (MSVC AND CMAKE_BUILD_TYPE MATCHES "Debug")
+    #        set(DEBUG_SUFFIX "d")
+    #    endif ()
     set(QT_INSTALL_PATH "${CMAKE_PREFIX_PATH}")
     if (NOT EXISTS "${QT_INSTALL_PATH}/bin")
         set(QT_INSTALL_PATH "${QT_INSTALL_PATH}/..")

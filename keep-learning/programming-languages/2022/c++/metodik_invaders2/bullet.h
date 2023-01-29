@@ -10,17 +10,21 @@ namespace metodik_invaders2 {
   class Bullet : public QObject, public QGraphicsPixmapItem {
   Q_OBJECT
   public:
-    Bullet(settings::BULLET_OWNER ownerType = settings::BULLET_OWNER::PLAYER,
-           int bMoveStep = static_cast<int>(settings::MOVE_STEPS::MOVE02),
+    Bullet(settings::Faction ownerType = settings::Faction::Player,
+           int bMoveStep = static_cast<int>(settings::MoveSteps::Move02),
+           settings::AmmoType ammoType = settings::AmmoType::TypeLaser,
+           settings::AmmoDmgLvl dmgLevel = settings::AmmoDmgLvl::Dmg10,
            QObject *parent = nullptr);
 
     ~Bullet() = default;
 
-    settings::BULLET_OWNER getOwner();
+    settings::Faction getOwner();
 
   private:
-    settings::BULLET_OWNER myOwnersType;
+    settings::Faction myOwnersType;
+    settings::AmmoType m_ammoType;
     int m_bMoveStep;
+
   private slots:
 
     void move();

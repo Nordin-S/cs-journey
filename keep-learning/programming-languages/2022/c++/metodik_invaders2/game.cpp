@@ -14,6 +14,18 @@ namespace metodik_invaders2 {
     // Create a new scene and view
     scene = new QGraphicsScene();
     view = new QGraphicsView(scene);
+
+    // performance of view
+    view->setCacheMode(QGraphicsView::CacheBackground);
+    view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    view->setOptimizationFlags(QGraphicsView::DontSavePainterState);
+    view->setOptimizationFlags(QGraphicsView::DontAdjustForAntialiasing);
+
+    // quality of view
+    view->setRenderHint(QPainter::Antialiasing);
+    view->setRenderHint(QPainter::SmoothPixmapTransform);
+    view->setRenderHint(QPainter::TextAntialiasing);
+
 //    view->setFixedSize(800, 1000);
 //    view->setSceneRect(400, 200, 800, 1000);
 //    view->showMaximized();
@@ -24,6 +36,7 @@ namespace metodik_invaders2 {
 
     view->showFullScreen();
 
+    // TODO: move to background handler
     Background *bgUniverse = new Background(1, 100,
                                             {":/resources/bg/nebulaAquaPink.png"},
                                             scene);
@@ -50,21 +63,26 @@ namespace metodik_invaders2 {
                                             scene);
 
     // Create a new player and add it to the scene
-    player = new Player(static_cast<int>(settings::SHIP_SPEEDS::PLAYER_SPEED),
-                      static_cast<int>(settings::HEALTHS::PLAYER_HEALTH),
-                      static_cast<int>(settings::UPDATE_MS::uMS01),
-                      settings::AMMO_TYPE::LASER_SMALL,
-                      settings::ENEMY_SHIP_TYPE::FIGHTER, this);
+    player = new Player(settings::ShipSpeeds::PlayerSpeed,
+                        settings::Healths::PlayerHealth,
+                        settings::UpdateMs::UMs10,
+                        settings::MoveSteps::Move50,
+                        settings::AmmoType::TypeLaser,
+                        settings::AmmoDmgLvl::Dmg01,
+                        settings::ShipTypes::Striker,
+                        this);
     scene->addItem(player);
-    player->setPosition(view->width(), view->height());
+    player->setPosition(scene->width()/2, scene->height()-200);
 
-
+    // TODO: generate enemy - needs enemy spawner class
     // Create a new enemy and add it to the scene
-    enemy = new Enemy(static_cast<int>(settings::SHIP_SPEEDS::FIGHTER_SPEED),
-                      static_cast<int>(settings::HEALTHS::FIGTHER_HEALTH),
-                      static_cast<int>(settings::UPDATE_MS::uMS01),
-                      settings::ENEMY_SHIP_TYPE::FIGHTER, this);
-    scene->addItem(enemy);
+//    enemy = new Enemy(settings::ShipSpeeds::FighterSpeed,
+//                      settings::Healths::FighterHealth,
+//                      settings::UpdateMs::UMs50,
+//                      settings::MoveSteps::Move70,
+//                      settings::AmmoType::TypeLaser,
+//                      settings::EnemyShipType, this);
+//    scene->addItem(enemy);
 
     // Create a timer for the game loop
     QTimer *timer = new QTimer();
@@ -77,27 +95,28 @@ namespace metodik_invaders2 {
     view->activateWindow();
     view->installEventFilter(this);
 
-
-//    bgMusic = new BackgroundMusic({"qrc:/resources/music/playTime01.mp3"});
+    bgMusic = new BackgroundMusic({"qrc:/resources/music/playTime01.mp3"});
+    bgMusic->setVolume(10);
 
     view->setBackgroundBrush(Qt::black);
     view->show();
-
-//    qDebug() << "View has focus: " << view->hasFocus();
-//    qDebug() << "Player has focus: " << player->hasFocus();
   }
 
-
+  // TODO: move to input handler class and needs to be improved
   bool Game::eventFilter(QObject *obj, QEvent *event) {
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
     if (event->type() == QEvent::KeyPress) {
       if (keyEvent->key() == Qt::Key_Left) {
-        player->stopMoveRight();
-        player->moveLeft();
+        player->setDirectionX(-1);
       }
       if (keyEvent->key() == Qt::Key_Right) {
-        player->stopMoveLeft();
-        player->moveRight();
+        player->setDirectionX(1);
+      }
+      if(keyEvent->key() == Qt::Key_Up) {
+        player->setDirectionY(-1);
+      }
+      if(keyEvent->key() == Qt::Key_Down) {
+        player->setDirectionY(1);
       }
       if (keyEvent->key() == Qt::Key_Space) {
         player->startShooting();
@@ -108,10 +127,16 @@ namespace metodik_invaders2 {
         player->stopShooting();
       }
       if (keyEvent->key() == Qt::Key_Left) {
-        player->stopMoveLeft();
+        player->setDirectionX(0);
       }
       if (keyEvent->key() == Qt::Key_Right) {
-        player->stopMoveRight();
+        player->setDirectionX(0);
+      }
+      if(keyEvent->key() == Qt::Key_Up) {
+        player->setDirectionY(0);
+      }
+      if(keyEvent->key() == Qt::Key_Down) {
+        player->setDirectionY(0);
       }
     }
     return QObject::eventFilter(obj, event);
@@ -119,7 +144,6 @@ namespace metodik_invaders2 {
 
   Game::~Game() {
     delete player;
-    // TODO: should delete this one aswell
-//    delete bgMusic;
+    delete bgMusic;
   }
 } // namespace metodik_invaders2
