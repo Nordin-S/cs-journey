@@ -23,12 +23,15 @@ namespace metodik_invaders2 {
   private:
     settings::Faction myOwnersType;
     settings::AmmoType m_ammoType;
+    settings::AmmoDmgLvl m_dmgLevel;
+    QTimer *updateTimer;
     int m_bMoveStep;
 
   private slots:
 
     void move();
-
+  public slots:
+    int getDamage();
   signals:
 
   };

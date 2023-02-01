@@ -28,12 +28,13 @@ namespace metodik_invaders2 {
   };
 
   QList<QString> settings::getShipAnimation(settings::ShipTypes shipType,
-                                  settings::AnimationStates animState) {
+                                            settings::AnimationStates animState) {
 
     QString shipTypeStr = settings::shipTypes.find(shipType)->second;
     QString animStateStr = settings::animationStates.find(animState)->second;
     QString path = ":/resources/ships/" + shipTypeStr +
                    "/" + animStateStr + "/";
+//    qDebug() << "Path: " << path;
 
     // TODO: refactor this to retrieve images for any path request
 //    if(!QDir(path).exists()){}
@@ -51,6 +52,7 @@ namespace metodik_invaders2 {
     } catch (...) {
       qDebug() << "Unknown error";
     }
+    std::sort(animList.begin(), animList.end());
     return animList;
   }
 }

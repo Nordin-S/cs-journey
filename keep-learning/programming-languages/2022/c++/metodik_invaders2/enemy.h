@@ -5,38 +5,36 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include "settings.h"
+#include "spacecraft.h"
 
 namespace metodik_invaders2 {
-  class Enemy : public QObject, public QGraphicsPixmapItem {
+  class Enemy : public SpaceCraft {
   Q_OBJECT
   public:
-    Enemy(int speed = static_cast<int>(settings::ShipSpeeds::FighterSpeed),
-          int health = static_cast<int>(settings::Healths::FighterHealth),
-          int fireRate = static_cast<int>(settings::UpdateMs::UMs01),
-          int bulletMoveStep = static_cast<int>(settings::MoveSteps::Move01),
-          settings::AmmoType ammoType = settings::AmmoType::TypeLaser,
-          settings::AmmoDmgLvl dmgLevel = settings::AmmoDmgLvl::Dmg10,
-          settings::EnemyShipType shipType = settings::EnemyShipType::Fighter,
-          QObject *parent = nullptr);
+    explicit Enemy(int speed = settings::ShipSpeeds::FighterSpeed,
+                   int health = settings::Healths::FighterHealth,
+                   int fireRate = settings::UpdateMs::UMs01,
+                   int bulletMoveStep = settings::MoveSteps::Move01,
+                   settings::AmmoType ammoType = settings::AmmoType::TypeLaser,
+                   settings::AmmoDmgLvl dmgLevel = settings::AmmoDmgLvl::Dmg10,
+                   settings::ShipTypes shipType = settings::ShipTypes::Striker,
+                   settings::EnemyShipType enemyShipType = settings::EnemyShipType::Fighter,
+                   QGraphicsScene* scene = nullptr,
+                   QObject *parent = nullptr);
 
-    int getHealth();
+    ~Enemy() override;
 
-    void setHealth(int health);
+    settings::Faction getFaction() override;
 
   public slots:
 
-    void move();
+    void move() override;
 
-    void shoot();
+    void shoot() override;
 
   private:
-    int m_speed;
-    int m_health;
-    int m_fireRate;
-    int m_bulletMoveStep;
-    settings::AmmoType m_ammoType;
-    settings::AmmoDmgLvl m_dmgLevel;
-    settings::EnemyShipType shipType;
+    settings::EnemyShipType m_enemyType;
+    QGraphicsScene* m_scene;
 
   signals:
 

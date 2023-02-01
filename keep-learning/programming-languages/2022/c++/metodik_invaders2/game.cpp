@@ -1,8 +1,9 @@
 #include "game.h"
-#include "player.h"
+#include "spacecraft.h"
 #include "enemy.h"
 #include "background.h"
 #include "backgroundmusic.h"
+#include "player.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QTimer>
@@ -11,9 +12,10 @@
 
 namespace metodik_invaders2 {
   Game::Game() {
-    // Create a new scene and view
+
+    view = new QGraphicsView();
     scene = new QGraphicsScene();
-    view = new QGraphicsView(scene);
+    view->setScene(scene);
 
     // performance of view
     view->setCacheMode(QGraphicsView::CacheBackground);
@@ -32,57 +34,53 @@ namespace metodik_invaders2 {
     view->setFixedSize(QApplication::primaryScreen()->size());
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+
+
     scene->setSceneRect(0, 0, view->width(), view->height());
 
-    view->showFullScreen();
+
 
     // TODO: move to background handler
-    Background *bgUniverse = new Background(1, 100,
-                                            {":/resources/bg/nebulaAquaPink.png"},
-                                            scene);
-    Background *galaxies = new Background(1, 90,
-                                          {":/resources/bg/galaxies01.png",
-                                           ":/resources/bg/galaxies02.png"},
-                                          scene);
-    Background *bgStars1 = new Background(1, 80,
-                                          {":/resources/bg/starsSmall1.png"},
-                                          scene);
-    Background *bgStars2 = new Background(1, 60,
-                                          {":/resources/bg/starsSmall2.png"},
-                                          scene);
+    auto *bgUniverse = new Background(1, 100,
+                                      {":/resources/bg/nebulaAquaPink.png"},
+                                      scene);
+    auto *galaxies = new Background(1, 90,
+                                    {":/resources/bg/galaxies01.png",
+                                     ":/resources/bg/galaxies02.png"},
+                                    scene);
+    auto *bgStars1 = new Background(1, 80,
+                                    {":/resources/bg/starsSmall1.png"},
+                                    scene);
+    auto *bgStars2 = new Background(1, 60,
+                                    {":/resources/bg/starsSmall2.png"},
+                                    scene);
 
     QList<QString> planetSlides = {":/resources/bg/planets01.png",
                                    ":/resources/bg/planets02.png",
                                    ":/resources/bg/planets03.png",
                                    ":/resources/bg/planets04.png",
     };
-    Background *bgPlanets = new Background(2, 20, planetSlides, scene);
+    auto *bgPlanets = new Background(2, 20, planetSlides, scene);
 
-    Background *bgStarWarp = new Background(6, 8,
-                                            {":/resources/bg/starfieldWarp.png"},
-                                            scene);
+    auto *bgStarWarp = new Background(6, 8,
+                                      {":/resources/bg/starfieldWarp.png"},
+                                      scene);
 
     // Create a new player and add it to the scene
     player = new Player(settings::ShipSpeeds::PlayerSpeed,
-                        settings::Healths::PlayerHealth,
-                        settings::UpdateMs::UMs10,
-                        settings::MoveSteps::Move50,
-                        settings::AmmoType::TypeLaser,
-                        settings::AmmoDmgLvl::Dmg01,
-                        settings::ShipTypes::Striker,
-                        this);
+                            settings::Healths::PlayerHealth,
+                            settings::UpdateMs::UMs200,
+                            settings::MoveSteps::Move01,
+                            settings::AmmoType::TypeLaser,
+                            settings::AmmoDmgLvl::Dmg10,
+                            settings::ShipTypes::Striker,
+                            this);
     scene->addItem(player);
     player->setPosition(scene->width()/2, scene->height()-200);
+    player->setZValue(std::numeric_limits<qreal>::max());
 
-    // TODO: generate enemy - needs enemy spawner class
-    // Create a new enemy and add it to the scene
-//    enemy = new Enemy(settings::ShipSpeeds::FighterSpeed,
-//                      settings::Healths::FighterHealth,
-//                      settings::UpdateMs::UMs50,
-//                      settings::MoveSteps::Move70,
-//                      settings::AmmoType::TypeLaser,
-//                      settings::EnemyShipType, this);
-//    scene->addItem(enemy);
+    spawnHandler = new SpawnHandler(100, scene, this);
 
     // Create a timer for the game loop
     QTimer *timer = new QTimer();
@@ -91,15 +89,14 @@ namespace metodik_invaders2 {
     timer->start(1000 / 60);
 
     // Show the view
+
     view->setFocus();
     view->activateWindow();
     view->installEventFilter(this);
 
     bgMusic = new BackgroundMusic({"qrc:/resources/music/playTime01.mp3"});
-    bgMusic->setVolume(10);
 
-    view->setBackgroundBrush(Qt::black);
-    view->show();
+    view->showFullScreen();
   }
 
   // TODO: move to input handler class and needs to be improved

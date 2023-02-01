@@ -42,7 +42,10 @@ namespace metodik_invaders2 {
       UMs70 = 70,
       UMs80 = 80,
       UMs90 = 90,
-      UMs100 = 100
+      UMs100 = 100,
+      UMs150 = 150,
+      UMs200 = 200,
+      UMs300 = 300,
     };
     enum MoveSteps {
       Move01 = 1,
@@ -76,7 +79,7 @@ namespace metodik_invaders2 {
     };
 
     enum Faction {
-      Player, Enemy
+      Player, Enemy, GameObject
     };
     enum AmmoType {
       TypeLaser, TypeMissile
@@ -100,33 +103,34 @@ namespace metodik_invaders2 {
 
     enum ShipTypes {
       // player
-      Striker, Enforcer, Fury,
+      Striker, // NightHawk,  Fury,
       // fighter
-      Viper, NightHawk, Sabre, Avenger, Nemesis,
+      Viper, Enforcer, // Sabre, Avenger, Nemesis,
       //bomber
-      Bombardier, Pummeler, Oblivion, Annihilator,
+      Bombardier, // Pummeler, Oblivion, Annihilator,
       //boss
-      Leviathan, Behemoth, // Colossus, Titan, Apocalypse
+      // Leviathan,
+      Behemoth, // Colossus, Titan, Apocalypse
     };
 
     const std::map<ShipTypes, QString> shipTypes = {
       //playerships
       {Striker,     "striker"},
-      {Enforcer,    "enforcer"},
-      {Fury,        "fury"},
+//      {NightHawk,   "nighthawk"},
+//      {Fury,        "fury"},
       // fighter ships
       {Viper,       "viper"},
-      {NightHawk,   "nighthawk"},
-      {Sabre,       "sabre"},
-      {Avenger,     "avenger"},
-      {Nemesis,     "nemesis"},
+      {Enforcer,    "enforcer"},
+//      {Sabre,       "sabre"},
+//      {Avenger,     "avenger"},
+//      {Nemesis,     "nemesis"},
       // Bomber ships
       {Bombardier,  "bombardier"},
-      {Pummeler,    "pummeler"},
-      {Oblivion,    "oblivion"},
-      {Annihilator, "annihilator"},
+//      {Pummeler,    "pummeler"},
+//      {Oblivion,    "oblivion"},
+//      {Annihilator, "annihilator"},
       // Boss ships
-      {Leviathan,   "leviathan"},
+//      {Leviathan,   "leviathan"},
       {Behemoth,    "behemoth"},
     };
 
@@ -143,23 +147,156 @@ namespace metodik_invaders2 {
       {Exploding,    "exploding"}
     };
 
+    const QList<QList<QList<bool>>> formations = {
+      {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 1, 0, 0},
+        {0, 0, 1, 1, 1, 1, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 1, 1, 0, 0, 0, 1, 1, 0},
+        {0, 1, 1, 1, 1, 1, 1, 1, 0},
+        {0, 0, 1, 1, 1, 1, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 1, 0, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 1, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 0, 1, 1, 0, 0},
+        {0, 0, 0, 0, 0, 1, 1, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 0, 1, 1, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0, 0},
+        {0, 0, 0, 1, 1, 0, 0, 0, 0},
+        {0, 0, 0, 1, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 1, 0, 0},
+        {0, 0, 0, 1, 1, 1, 1, 0, 0},
+        {0, 0, 0, 0, 0, 1, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 1, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+      },
+      {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 1, 0, 0},
+        {0, 0, 0, 0, 1, 1, 1, 1, 0},
+        {0, 0, 0, 0, 0, 1, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+      },
+      {
+        {1, 1, 1, 0, 0, 0, 1, 1, 1},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {1, 0, 0, 1, 1, 1, 0, 0, 1},
+        {0, 1, 0, 1, 1, 1, 0, 1, 0},
+        {0, 0, 1, 1, 1, 1, 1, 0, 0}
+      },
+      {
+        {0, 0, 1, 1, 0, 1, 1, 0, 0},
+        {0, 1, 0, 1, 1, 1, 0, 1, 0},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {0, 1, 0, 1, 1, 1, 0, 1, 0},
+        {0, 0, 1, 1, 0, 1, 1, 0, 0}
+      },
+      {
+        {1, 0, 0, 0, 0, 0, 0, 0, 1},
+        {0, 1, 0, 0, 0, 0, 0, 1, 0},
+        {0, 0, 1, 0, 0, 0, 1, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {1, 0, 0, 0, 0, 0, 0, 0, 1}
+      },
+      {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 1, 0, 0},
+      },
+      {
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 0, 1, 1, 0, 1, 1, 0, 0},
+        {0, 1, 1, 0, 1, 0, 1, 1, 0},
+        {1, 1, 0, 1, 0, 1, 0, 1, 1},
+      },
+      {
+        {0, 0, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 1, 0, 0},
+      },
+      {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 1, 0, 0, 0, 1, 0, 0},
+        {0, 1, 0, 1, 0, 1, 0, 1, 0},
+        {0, 0, 1, 0, 1, 0, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+      },
+      {
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 1, 1, 0, 1, 1, 0, 0},
+        {0, 1, 0, 1, 1, 1, 0, 1, 0},
+        {1, 0, 1, 1, 0, 1, 1, 0, 1},
+        {0, 1, 0, 1, 1, 1, 0, 1, 0},
+      },
+    };
+
+
+
     extern const QList<QString> ammoLasers;
     extern const QList<QString> ammoMissiles;
 
-    extern QList<QString> getShipAnimation(ShipTypes shipType, AnimationStates animState);
-
-    // TODO: are save player score and get player score needed here?
-//    void savePlayerScore(std::string gameTime, std::string score,
-//                         std::string playerName) {
-//      // save to file row depending on score
-//    }
-//
-//    std::vector<std::string>
-//    getPlayerScore(std::string gameTime, std::string score,
-//                   std::string playerName) {
-//      // read and return score file
-//      return {};
-//    }
+    extern QList<QString>
+    getShipAnimation(ShipTypes shipType, AnimationStates animState);
   }; // metodik_invaders2
 }
 #endif //METODIK_INVADERS2_SETTINGS// _H

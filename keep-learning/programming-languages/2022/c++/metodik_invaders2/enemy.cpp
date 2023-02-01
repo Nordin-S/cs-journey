@@ -1,25 +1,23 @@
 #include <QTimer>
-#include <QGraphicsScene>
-
+#include "spacecraft.h"
 #include "enemy.h"
 #include "bullet.h"
 
 namespace metodik_invaders2 {
   Enemy::Enemy(int speed, int health, int fireRate, int bulletMoveStep,
-               settings::AmmoType ammoType,
-               settings::AmmoDmgLvl dmgLevel,
-               settings::EnemyShipType shipType, QObject *parent)
-    : m_speed(speed), m_health(health), m_fireRate(fireRate),
-      m_bulletMoveStep(bulletMoveStep), m_ammoType(ammoType), m_dmgLevel(dmgLevel),
-      shipType(shipType),
-      QObject{parent} {
+               settings::AmmoType ammoType, settings::AmmoDmgLvl dmgLevel,
+               settings::ShipTypes shipType,
+               settings::EnemyShipType enemyShipType, QGraphicsScene* scene, QObject *parent)
+    : m_scene(scene), SpaceCraft(
+    speed, health, fireRate, bulletMoveStep, ammoType, dmgLevel, shipType,
+    parent), m_enemyType(enemyShipType) {
 
-    int screenMarginX = 400;
-    int aboveScreen = 200;
+//    int screenMarginX = 400;
+//    int aboveScreen = 200;
     //TODO: fix set pos for enemy
 //    setPos(
 //      rand() % static_cast<int>(scene()->sceneRect().width()) - screenMarginX,
-    setPos(screenMarginX, aboveScreen);
+//    setPos(screenMarginX, aboveScreen);
 
 //    switch (shipType) {
 //      case settings::EnemyShipType::Fighter:
@@ -35,22 +33,13 @@ namespace metodik_invaders2 {
 
     QTimer *timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    connect(timer, SIGNAL(timeout()), this, SLOT(shoot()));
+//    connect(timer, SIGNAL(timeout()), this, SLOT(shoot()));
     timer->start(m_fireRate);
-
-  }
-
-  int Enemy::getHealth() {
-    return m_health;
-  }
-
-  void Enemy::setHealth(int health) {
-    this->m_health = health;
   }
 
   void Enemy::move() {
     // choose m_speed based on ship type
-    switch (shipType) {
+    switch (m_enemyType) {
       case settings::EnemyShipType::Fighter:
         setPos(x(),
                y() + static_cast<int>(settings::ShipSpeeds::FighterSpeed));
@@ -64,16 +53,16 @@ namespace metodik_invaders2 {
                y() + static_cast<int>(settings::ShipSpeeds::BossSpeed));
         break;
     }
-//    if(pos().y() > scene()->sceneRect().height()){
-//        scene()->removeItem(this);
-//        this->deleteLater();
-//    }
+    if(pos().y() > m_scene->height()){
+        m_scene->removeItem(this);
+        this->deleteLater();
+    }
   }
 
 
   void Enemy::shoot() {
-    int randomNum = rand() % 100 + 1;
-    if (randomNum >= 90) {
+    int randomNum = rand() % 200 + 1;
+    if (randomNum <= 5) {
       // create bullets and add to scene
       Bullet *bullet = new Bullet(settings::Faction::Enemy,
                                   m_bulletMoveStep,
@@ -85,6 +74,14 @@ namespace metodik_invaders2 {
 
       bullet->setPos(shipsCenterX - bulletsCenterX, y());
       scene()->addItem(bullet);
+      emit fireBulletSignal();
     }
+  }
+
+  settings::Faction Enemy::getFaction() {
+    return settings::Faction::Enemy;
+  }
+
+  Enemy::~Enemy() {
   }
 } // namespace metodik_invaders2

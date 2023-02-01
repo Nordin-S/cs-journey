@@ -11,9 +11,15 @@ namespace metodik_invaders2 {
     player->setSource(QUrl(m_musicPaths[0]));
     audioOutput = new QAudioOutput;
     player->setAudioOutput(audioOutput);
-    player->audioOutput()->setVolume(50);
+    player->audioOutput()->setVolume(0.25f);
     //TODO: background music douse not seem to loop
     player->setLoops(QMediaPlayer::Infinite);
+    // loop the music
+    connect(player, &QMediaPlayer::mediaStatusChanged, [this](QMediaPlayer::MediaStatus status) {
+      if (status == QMediaPlayer::EndOfMedia) {
+        player->play();
+      }
+    });
     player->play();
   }
 

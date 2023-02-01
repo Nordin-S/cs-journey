@@ -1,6 +1,6 @@
 #include "background.h"
+#include "BackgroundPixmapItem.h"
 
-#include <QBrush>
 #include <QTimer>
 #include <QGraphicsScene>
 
@@ -10,17 +10,23 @@ namespace metodik_invaders2 {
     : QObject(parent), m_speed(speed), m_updateSpeed(updateSpeed),
       m_images(imgPaths), m_theScene(theScene) {
 
+
     if (m_images.size() > 1)
       m_image.load(m_images[rand() % m_images.size()]);
     else
       m_image.load(imgPaths[0]);
     for (int i = 0; i < 3; i++) {
-      QGraphicsPixmapItem *instance = new QGraphicsPixmapItem();
+      auto *instance = new BackgroundPixmapItem();
+
       instance->setPixmap(m_image);
       instance->setPos(0, -(i * m_image.height()));
       m_instances.append(instance);
-      theScene->addItem(instance);
+      m_theScene->addItem(instance);
+      // Turn off collision detection for the pixmap item
+      instance->setData(0, false);
+      setData(0, false);
     }
+
     QTimer *timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(m_updateSpeed);

@@ -101,8 +101,8 @@ add_executable(metodik_invaders2
         invaders.h
         invaders.ui
         resource.qrc
-        player.h
-        player.cpp
+        spacecraft.h
+        spacecraft.cpp
         bullet.h
         bullet.cpp
         enemy.h
@@ -113,7 +113,7 @@ add_executable(metodik_invaders2
         background.cpp
         backgroundmusic.h
         backgroundmusic.cpp
-        )
+        GameObject.h GameObject.cpp player.cpp player.h SfxHandler.cpp SfxHandler.h SpawnHandler.cpp SpawnHandler.h BackgroundPixmapItem.h)
 target_link_libraries(metodik_invaders2
         Qt::Core
         Qt::Gui

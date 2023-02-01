@@ -2,9 +2,12 @@
 #define METODIK_INVADERS2_GAME_H
 
 #include <QObject>
-#include "player.h"
+#include <QVBoxLayout>
+#include "spacecraft.h"
 #include "enemy.h"
 #include "backgroundmusic.h"
+#include "SpawnHandler.h"
+#include "player.h"
 
 //class QGraphicsView;
 //class QGraphicsScene;
@@ -25,8 +28,15 @@ namespace metodik_invaders2 {
     QGraphicsView *view;
     QGraphicsScene *scene;
     Player *player;
+    int m_score;
+    int m_lives;
+    int m_health;
+    int m_waveCount;
     Enemy *enemy;
+    SpawnHandler *spawnHandler;
     BackgroundMusic *bgMusic;
+
+    QWidget *widget;
   };
 
 } // namespace metodik_invaders2
