@@ -47,6 +47,30 @@
 
         <file>resources/ui/gameOver.png</file>
         <file>resources/ui/spaceInvasion.png</file>
+        <file>resources/ui/health0.png</file>
+        <file>resources/ui/health10.png</file>
+        <file>resources/ui/health20.png</file>
+        <file>resources/ui/health30.png</file>
+        <file>resources/ui/health40.png</file>
+        <file>resources/ui/health50.png</file>
+        <file>resources/ui/health60.png</file>
+        <file>resources/ui/health70.png</file>
+        <file>resources/ui/health80.png</file>
+        <file>resources/ui/health90.png</file>
+        <file>resources/ui/health100.png</file>
+        <file>resources/ui/life1.png</file>
+        <file>resources/ui/life2.png</file>
+        <file>resources/ui/life3.png</file>
+        <file>resources/ui/quitGame.png</file>
+        <file>resources/ui/quitGame_active.png</file>
+        <file>resources/ui/resume.png</file>
+        <file>resources/ui/resume_active.png</file>
+        <file>resources/ui/startGame.png</file>
+        <file>resources/ui/startGame_active.png</file>
+        <file>resources/ui/retry.png</file>
+        <file>resources/ui/retry_active.png</file>
+        <file>resources/ui/score.png</file>
+        <file>resources/ui/menuBg.mp4</file>
 
         <file>resources/ships/striker/cruising/striker_cruising_00.png</file>
         <file>resources/ships/striker/cruising/striker_cruising_01.png</file>

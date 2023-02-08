@@ -91,15 +91,13 @@ find_package(Qt6 COMPONENTS
         Gui
         Widgets
         Multimedia
+        MultimediaWidgets
         REQUIRED)
 
 add_executable(metodik_invaders2
         settings.h
         settings.cpp
         main.cpp
-        invaders.cpp
-        invaders.h
-        invaders.ui
         resource.qrc
         spacecraft.h
         spacecraft.cpp
@@ -113,12 +111,28 @@ add_executable(metodik_invaders2
         background.cpp
         backgroundmusic.h
         backgroundmusic.cpp
-        GameObject.h GameObject.cpp player.cpp player.h SfxHandler.cpp SfxHandler.h SpawnHandler.cpp SpawnHandler.h BackgroundPixmapItem.h)
+        GameObject.h
+        GameObject.cpp
+        player.cpp
+        player.h
+        SfxHandler.cpp
+        SfxHandler.h
+        SpawnHandler.cpp
+        SpawnHandler.h
+        BackgroundPixmapItem.h
+        InputHandler.cpp
+        InputHandler.h
+        GameMenu.cpp
+        GameMenu.h
+        MenuButton.cpp
+        MenuButton.h
+        )
 target_link_libraries(metodik_invaders2
-        Qt::Core
-        Qt::Gui
-        Qt::Widgets
-        Qt::Multimedia
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
+        Qt6::Multimedia
+        Qt6::MultimediaWidgets
         )
 
 

@@ -16,7 +16,7 @@ namespace metodik_invaders2 {
 //    int aboveScreen = 200;
     //TODO: fix set pos for enemy
 //    setPos(
-//      rand() % static_cast<int>(scene()->sceneRect().width()) - screenMarginX,
+//      rand() % static_cast<int>(gameScene()->sceneRect().width()) - screenMarginX,
 //    setPos(screenMarginX, aboveScreen);
 
 //    switch (shipType) {
@@ -63,7 +63,7 @@ namespace metodik_invaders2 {
   void Enemy::shoot() {
     int randomNum = rand() % 200 + 1;
     if (randomNum <= 5) {
-      // create bullets and add to scene
+      // create bullets and add to gameScene
       Bullet *bullet = new Bullet(settings::Faction::Enemy,
                                   m_bulletMoveStep,
                                   m_ammoType,

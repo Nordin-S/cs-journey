@@ -172,7 +172,7 @@ namespace metodik_invaders2 {
   void SpaceCraft::shoot() {
     if (m_health <= 0 || !isShooting)
       return;
-    // create bullets and add to scene
+    // create bullets and add to gameScene
     Bullet *bullet = new Bullet(settings::Faction::Player,
                                 m_bulletMoveStep,
                                 m_ammoType,

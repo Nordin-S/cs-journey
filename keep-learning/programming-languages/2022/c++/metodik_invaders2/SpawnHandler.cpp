@@ -95,9 +95,9 @@ namespace metodik_invaders2 {
     int shipSize = m_scene->width() / formationWidth - (2 * edgeOffset);
     int startX = shipSize / 2 + leftBound;
 
-//    qDebug() << "scene height: " << m_scene->height();
-//    qDebug() << "scene width: " << m_scene->width();
-//    qDebug() << "scene rect: " << m_scene->sceneRect();
+//    qDebug() << "gameScene height: " << m_scene->height();
+//    qDebug() << "gameScene width: " << m_scene->width();
+//    qDebug() << "gameScene rect: " << m_scene->sceneRect();
     int sceneHeightSpawnArea = m_scene->height() * 0.6f;
 
     int startY = (sceneHeightSpawnArea / formationHeight + shipSize / 2) -

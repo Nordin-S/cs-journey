@@ -37,13 +37,13 @@ namespace metodik_invaders2 {
       setPos(x(), y() + m_bMoveStep * pixmap().height());
 
 //    if(pos().y() + pixmap().height() < parentObject()->boundingRect().top() || pos().y() > parentObject()->boundingRect().height()){
-////        scene()->removeItem(this);
+////        gameScene()->removeItem(this);
 //        qDebug() << "test";
 //        this->deleteLater();
 //    }
 
 //    if (y() < 0 || y() > 1000) {
-////        scene()->removeItem(this);
+////        gameScene()->removeItem(this);
 //        this->deleteLater();
 //    }
   }
