@@ -122,11 +122,11 @@ add_executable(metodik_invaders2
         BackgroundPixmapItem.h
         InputHandler.cpp
         InputHandler.h
-        GameMenu.cpp
-        GameMenu.h
+        MenuScene.cpp
+        MenuScene.h
         MenuButton.cpp
         MenuButton.h
-        )
+        SceneMaker.h GameScene.cpp GameScene.h)
 target_link_libraries(metodik_invaders2
         Qt6::Core
         Qt6::Gui

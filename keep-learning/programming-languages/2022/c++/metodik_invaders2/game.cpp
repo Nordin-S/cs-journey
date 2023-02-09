@@ -3,7 +3,8 @@
 #include "background.h"
 #include "backgroundmusic.h"
 #include "player.h"
-#include "GameMenu.h"
+#include "MenuScene.h"
+#include "GameScene.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QTimer>
@@ -11,37 +12,39 @@
 
 namespace metodik_invaders2 {
   Game::Game()
-    : m_state(MAINMENU),
+    : m_state(settings::GameState::MAIN_MENU),
       m_score(0),
       m_lives(3),
       m_health(100),
       m_waveCount(0),
       view(new QGraphicsView()),
       m_inputHandler(new InputHandler()),
-      startMenuScene(new GameMenu(this)),
-      pauseMenuScene(new GameMenu(this)),
-      gameOverMenuScene(new GameMenu(this)),
-      gameScene(new GameMenu(this)) {
+      startMenuScene(new MenuScene(this)),
+      pauseMenuScene(new MenuScene(this)),
+      gameOverMenuScene(new MenuScene(this)),
+      gameScene(new GameScene(this)),
+      m_bgMusic(new BackgroundMusic(this)) {
 
     setupView();
-    setupGameScene();
+    gameScene->setSceneRect(0, 0, view->width(), view->height());
+    pauseMenuScene->setSceneRect(0, 0, view->width(), view->height());
+    gameOverMenuScene->setSceneRect(0, 0, view->width(), view->height());
+    startMenuScene->setSceneRect(0, 0, view->width(), view->height());
+
     setupMainMenuScene();
     setupPauseMenuScene();
     setupGameOverMenuScene();
+    setupGameScene();
 
-    view->setScene(startMenuScene);
+    showStartMenuScene();
 
     connect(m_inputHandler, &InputHandler::pausePressed, this,
-            &Game::togglePauseGame);
-
-
-    bgMusic = new BackgroundMusic({"qrc:/resources/music/menu01.mp3"});
-
+            &Game::showPauseScene);
   }
 
   Game::~Game() {
     delete player;
-    delete bgMusic;
+    delete m_bgMusic;
     delete spawnHandler;
     delete view;
     delete gameScene;
@@ -76,44 +79,40 @@ namespace metodik_invaders2 {
   void Game::setupGameBackground() {
     // Create a new background and add it to the gameScene
     auto *bgUniverse = new Background(1, 100,
-                                      {":/resources/bg/nebulaAquaPink.png"},
-                                      gameScene);
+                                      {":/resources/bg/nebulaAquaPink.png"});
     auto *galaxies = new Background(1, 90,
                                     {":/resources/bg/galaxies01.png",
-                                     ":/resources/bg/galaxies02.png"},
-                                    gameScene);
-    auto *bgStars1 = new Background(1, 80,
-                                    {":/resources/bg/starsSmall1.png"},
-                                    gameScene);
-    auto *bgStars2 = new Background(1, 60,
-                                    {":/resources/bg/starsSmall2.png"},
-                                    gameScene);
+                                     ":/resources/bg/galaxies02.png"});
+    auto *bgStars1 = new Background(1, 80, {":/resources/bg/starsSmall1.png"});
+    auto *bgStars2 = new Background(1, 60, {":/resources/bg/starsSmall2.png"});
 
     QList<QString> planetSlides = {":/resources/bg/planets01.png",
                                    ":/resources/bg/planets02.png",
                                    ":/resources/bg/planets03.png",
-                                   ":/resources/bg/planets04.png",
+                                   ":/resources/bg/planets04.png"
     };
-    auto *bgPlanets = new Background(2, 20, planetSlides, gameScene);
+    auto *bgPlanets = new Background(2, 20, planetSlides);
 
     auto *bgStarWarp = new Background(6, 8,
-                                      {":/resources/bg/starfieldWarp.png"},
-                                      gameScene);
+                                      {":/resources/bg/starfieldWarp.png"});
+
+    gameScene->addBackground(bgUniverse);
+    gameScene->addBackground(galaxies);
+    gameScene->addBackground(bgStars1);
+    gameScene->addBackground(bgStars2);
+    gameScene->addBackground(bgPlanets);
+    gameScene->addBackground(bgStarWarp);
   }
 
   void Game::setupMainMenuScene() {
-    startMenuScene->setSceneRect(0, 0, view->width(), view->height());
-
     // Create backgrounds and add it to this scene
-    auto *bgUniverse = new Background(1, 100,
-                                      {":/resources/bg/nebulaRed.png"},
-                                      startMenuScene);
-    auto *bgStars1 = new Background(1, 80,
-                                    {":/resources/bg/starsSmall1.png"},
-                                    startMenuScene);
-    auto *bgStars2 = new Background(1, 60,
-                                    {":/resources/bg/starsSmall2.png"},
-                                    startMenuScene);
+    auto *bgUniverse = new Background(1, 100, {":/resources/bg/nebulaRed.png"});
+    auto *bgStars1 = new Background(1, 80, {":/resources/bg/starsSmall1.png"});
+    auto *bgStars2 = new Background(1, 60, {":/resources/bg/starsSmall2.png"});
+
+    startMenuScene->addBackground(bgUniverse);
+    startMenuScene->addBackground(bgStars1);
+    startMenuScene->addBackground(bgStars2);
 
     startMenuScene->setTitleImg(":/resources/ui/spaceInvasion.png");
 
@@ -122,7 +121,7 @@ namespace metodik_invaders2 {
       QPixmap(":/resources/ui/startGame.png"),
       QPixmap(":/resources/ui/startGame_active.png"));
     startMenuScene->addButton(startBtn);
-    connect(startBtn, &MenuButton::clicked, this, &Game::startGame);
+    connect(startBtn, &MenuButton::clicked, this, &Game::showGameScene);
 
     // Create the quit button
     auto *quitBtn = new MenuButton(
@@ -132,20 +131,22 @@ namespace metodik_invaders2 {
     connect(quitBtn, &MenuButton::clicked, this,
             []() { QApplication::quit(); });
 
-    startMenuScene->buildMenu();
+    startMenuScene->buildScene();
   }
 
   void Game::setupPauseMenuScene() {
-    pauseMenuScene->setSceneRect(0, 0, view->width(), view->height());
   }
 
   void Game::setupGameOverMenuScene() {
-    gameOverMenuScene->setSceneRect(0, 0, view->width(), view->height());
   }
 
   void Game::setupGameScene() {
-    gameScene->setSceneRect(0, 0, view->width(), view->height());
     setupGameBackground();
+
+    // Create a gameSceneTimer for the game loop
+    gameSceneTimer = new QTimer();
+    connect(gameSceneTimer, SIGNAL(timeout()), gameScene, SLOT(advance()));
+    connect(gameSceneTimer, SIGNAL(timeout()), gameScene, SLOT(update()));
 
     // Create a new player and add it to the gameScene
     player = new Player(settings::ShipSpeeds::PlayerSpeed,
@@ -162,28 +163,49 @@ namespace metodik_invaders2 {
 
     spawnHandler = new SpawnHandler(100, gameScene, this);
 
+    gameScene->buildScene();
   }
 
-  void Game::startGame() {
-    m_state = RUNNING;
+  void Game::showStartMenuScene() {
+    m_state = settings::GameState::MAIN_MENU;
+    m_bgMusic->setMusicPath("qrc:/resources/music/menuMusic01.mp3");
+    view->setScene(startMenuScene);
+    startMenuScene->activate();
+    m_bgMusic->play();
+    gameSceneTimer->stop();
+  }
+
+  void Game::showGameScene() {
+    m_state = settings::GameState::RUNNING;
+    pauseMenuScene->deactivate();
+    gameOverMenuScene->deactivate();
+    m_bgMusic->setMusicPath("qrc:/resources/music/playTime01.mp3");
     view->setScene(gameScene);
-//    bgMusic->play(); // change to game music
-    // Create a gameSceneTimer for the game loop
-    QTimer *gameSceneTimer = new QTimer();
-    connect(gameSceneTimer, SIGNAL(timeout()), gameScene, SLOT(advance()));
-    connect(gameSceneTimer, SIGNAL(timeout()), gameScene, SLOT(update()));
+    gameScene->activate();
     gameSceneTimer->start(1000 / 60);
   }
 
-  void Game::togglePauseGame() {
-
+  void Game::showPauseScene() {
+    m_state = settings::GameState::PAUSED;
+    gameScene->deactivate();
+    gameOverMenuScene->deactivate();
+    m_bgMusic->setMusicPath("qrc:/resources/music/menuMusic01.mp3");
+    view->setScene(pauseMenuScene);
+    pauseMenuScene->activate();
+    gameSceneTimer->stop();
   }
 
-  void Game::resumeGame() {
-
+  void Game::showGameOverScene() {
+    m_state = settings::GameState::GAME_OVER;
+    gameScene->deactivate();
+    pauseMenuScene->deactivate();
+    m_bgMusic->setMusicPath("qrc:/resources/music/gameOver01.mp3");
+    view->setScene(gameOverMenuScene);
+    gameSceneTimer->stop();
   }
 
-  void Game::gameOver() {
-
+  void Game::retryGame() {
+    setupGameScene();
+    showGameScene();
   }
 } // namespace metodik_invaders2

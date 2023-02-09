@@ -5,10 +5,9 @@
 #include <QURL>
 
 namespace metodik_invaders2 {
-  BackgroundMusic::BackgroundMusic(QList<QString> filePaths, QObject *parent)
-    : m_musicPaths(filePaths), QObject(parent) {
+  BackgroundMusic::BackgroundMusic(QObject *parent)
+    : QObject(parent) {
     player = new QMediaPlayer(this);
-    player->setSource(QUrl(m_musicPaths[0]));
     audioOutput = new QAudioOutput;
     player->setAudioOutput(audioOutput);
     player->audioOutput()->setVolume(0.25f);
@@ -16,6 +15,7 @@ namespace metodik_invaders2 {
     player->setLoops(QMediaPlayer::Infinite);
     // loop the music
     connect(player, &QMediaPlayer::mediaStatusChanged, [this](QMediaPlayer::MediaStatus status) {
+      // play again if the music has ended
       if (status == QMediaPlayer::EndOfMedia) {
         player->play();
       }
@@ -38,5 +38,9 @@ namespace metodik_invaders2 {
   BackgroundMusic::~BackgroundMusic() {
     delete audioOutput;
     delete player;
+  }
+
+  void BackgroundMusic::setMusicPath(QString songPath) {
+    player->setSource(QUrl(songPath));
   }
 } // namespace metodik_invaders2

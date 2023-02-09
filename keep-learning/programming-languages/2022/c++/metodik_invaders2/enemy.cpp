@@ -33,7 +33,7 @@ namespace metodik_invaders2 {
 
     QTimer *timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-//    connect(timer, SIGNAL(timeout()), this, SLOT(shoot()));
+//    connect(m_backgroundTimer, SIGNAL(timeout()), this, SLOT(shoot()));
     timer->start(m_fireRate);
   }
 

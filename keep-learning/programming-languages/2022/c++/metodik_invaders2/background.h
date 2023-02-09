@@ -9,8 +9,11 @@ namespace metodik_invaders2 {
   Q_OBJECT
   public:
     Background(int speed, int updateSpeed, QList<QString> imgPaths,
-               QGraphicsScene *theScene, QObject *parent = nullptr);
+               QObject *parent = nullptr);
 
+    void startTimer();
+    void stopTimer();
+    QList<BackgroundPixmapItem *> getInstances() const;
     virtual ~Background() override = default;
 
 
@@ -19,11 +22,11 @@ namespace metodik_invaders2 {
     void move();
 
   private:
+    QTimer *m_backgroundTimer;
     int m_speed;
     int m_updateSpeed;
     QPixmap m_image;
     QList<QString> m_images;
-    QGraphicsScene *m_theScene;
     QList<BackgroundPixmapItem *> m_instances;
 
   };

@@ -2,17 +2,22 @@
 // Created by nordi on 2/6/2023.
 //
 
-#include "GameMenu.h"
+#include "MenuScene.h"
 #include "game.h"
+#include "background.h"
 
 namespace metodik_invaders2 {
 
-  GameMenu::GameMenu(QObject *parent) : QGraphicsScene(parent) {}
+  MenuScene::MenuScene(QObject *parent) : SceneMaker(parent) {}
 
-  void GameMenu::buildMenu() {
+  void MenuScene::buildScene() {
     addItem(m_title);
+    // loop through backgrounds list and add them to the scene
+    for (auto &background: m_backgrounds) {
+      addItem(background);
+    }
     // loop through buttons list and add them to the scene
-    for (auto &button : m_buttons) {
+    for (auto &button: m_buttons) {
       addItem(button);
     }
 
@@ -32,26 +37,34 @@ namespace metodik_invaders2 {
     y += m_title->boundingRect().height();
 
     // loop through buttons list and set their position
-    for (auto &button : m_buttons) {
+    for (auto &button: m_buttons) {
       button->setPos(centerX - button->boundingRect().width() / 2, y + margin);
       y += button->boundingRect().height();
     }
   }
 
-  void GameMenu::setTitleImg(QString title) {
-    // Set the m_title text
-    m_title = new QGraphicsPixmapItem(
-      QPixmap(title));
+  void MenuScene::setTitleImg(QString title) {
+    m_title = new QGraphicsPixmapItem(QPixmap(title));
   }
 
-  void GameMenu::addButton(MenuButton *button) {
+  void MenuScene::activate() {
+    // call base class activate
+    SceneMaker::activate();
+    // do other stuff if needed
+  }
+
+  void MenuScene::deactivate() {
+    // call base class deactivate
+    SceneMaker::deactivate();
+    // do other stuff if needed
+  }
+
+  void MenuScene::addButton(MenuButton *button) {
     m_buttons.append(button);
   }
 
-  GameMenu::~GameMenu() {
+  MenuScene::~MenuScene() {
     delete m_title;
-    for (auto &button : m_buttons) {
-      delete button;
-    }
   }
+
 } // metodik_invaders2

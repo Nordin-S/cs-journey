@@ -10,6 +10,12 @@
 
 namespace metodik_invaders2 {
   namespace settings {
+    enum GameState {
+      MAIN_MENU,
+      RUNNING,
+      PAUSED,
+      GAME_OVER
+    };
     enum Healths {
       PlayerHealth = 100,
       FighterHealth = 50,

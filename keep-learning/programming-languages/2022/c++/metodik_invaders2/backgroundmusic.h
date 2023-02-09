@@ -7,7 +7,7 @@ namespace metodik_invaders2 {
   class BackgroundMusic : public QObject {
   Q_OBJECT
   public:
-    BackgroundMusic(QList<QString> bgMusicList, QObject *parent = nullptr);
+    explicit BackgroundMusic(QObject *parent = nullptr);
 
     ~BackgroundMusic();
 
@@ -19,10 +19,12 @@ namespace metodik_invaders2 {
 
     void setVolume(int volume);
 
+    void setMusicPath(QString songPath);
+
   private:
     QMediaPlayer *player;
     QAudioOutput *audioOutput;
-    QList<QString> m_musicPaths;
+    QString m_songPath;
   };
 
 } // namespace metodik_invaders2

@@ -22,6 +22,7 @@ namespace metodik_invaders2 {
     m_formationSpawnTimer->setInterval(10000);
     m_miniBossSpawnTimer->setInterval(1000);
     m_bossSpawnTimer->setInterval(1000);
+
     connect(m_formationSpawnTimer, &QTimer::timeout, [this]() {
       if (m_playerScore >= m_formationSpawnThreshold) {
         emit spawnFormationSignal();

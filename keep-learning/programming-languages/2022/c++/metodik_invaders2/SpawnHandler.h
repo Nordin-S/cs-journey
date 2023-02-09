@@ -31,6 +31,7 @@ namespace metodik_invaders2 {
     void spawnMiniBossSignal();
     void spawnBossSignal();
     void setPlayerScoreSignal(const int &playerScore);
+    void togglePauseSignal( );
 
   public slots:
     void setPlayerScore(const int &playerScore);

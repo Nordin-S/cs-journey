@@ -6,30 +6,31 @@
 
 namespace metodik_invaders2 {
   Background::Background(int speed, int updateSpeed, QList<QString> imgPaths,
-                         QGraphicsScene *theScene, QObject *parent)
+                         QObject *parent)
     : QObject(parent), m_speed(speed), m_updateSpeed(updateSpeed),
-      m_images(imgPaths), m_theScene(theScene) {
+      m_images(imgPaths) {
+    const int NUM_IMAGES = 3; // TODO: two should be enough!?
 
-
-    if (m_images.size() > 1)
+    if (m_images.size() > 1){
       m_image.load(m_images[rand() % m_images.size()]);
-    else
+    } else {
       m_image.load(imgPaths[0]);
-    for (int i = 0; i < 3; i++) {
-      auto *instance = new BackgroundPixmapItem();
+    }
 
+    for (int i = 0; i < NUM_IMAGES; i++) {
+      auto *instance = new BackgroundPixmapItem();
       instance->setPixmap(m_image);
       instance->setPos(0, -(i * m_image.height()));
       m_instances.append(instance);
-      m_theScene->addItem(instance);
       // Turn off collision detection for the pixmap item
       instance->setData(0, false);
-      setData(0, false);
     }
 
-    QTimer *timer = new QTimer();
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(m_updateSpeed);
+//    setData(0, false); // TODO: do we need this?
+
+    m_backgroundTimer = new QTimer();
+    connect(m_backgroundTimer, SIGNAL(timeout()), this, SLOT(move()));
+//    m_backgroundTimer->start(m_updateSpeed);
   }
 
   void Background::move() {
@@ -43,5 +44,17 @@ namespace metodik_invaders2 {
         m_instances[i]->setPos(m_instances[i]->x(), -m_image.height());
       }
     }
+  }
+
+  void Background::startTimer() {
+    m_backgroundTimer->start(m_updateSpeed);
+  }
+
+  void Background::stopTimer() {
+    m_backgroundTimer->stop();
+  }
+
+  QList<BackgroundPixmapItem *> Background::getInstances() const {
+    return m_instances;
   }
 }

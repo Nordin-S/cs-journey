@@ -8,25 +8,20 @@
 #include "SpawnHandler.h"
 #include "player.h"
 #include "InputHandler.h"
-#include "GameMenu.h"
+#include "MenuScene.h"
+#include "GameScene.h"
 
 namespace metodik_invaders2 {
 
-  enum GameState {
-    MAINMENU,
-    RUNNING,
-    PAUSED,
-    GAMEOVER
-  };
   class Game : public QObject {
   Q_OBJECT
 
   public:
     Game();
 
-    void setState(GameState state);
+    void setState(settings::GameState state);
 
-    GameState getState() const;
+    settings::GameState getState() const;
 
     ~Game();
 
@@ -35,26 +30,28 @@ namespace metodik_invaders2 {
 //    QSet<int> pressedKeys;
 
   public slots:
-    void startGame();
-    void togglePauseGame();
-    void resumeGame();
-    void gameOver();
+    void showGameScene();
+    void showPauseScene();
+    void retryGame();
+    void showGameOverScene();
+    void showStartMenuScene();
 
   private:
-    GameState m_state;
+    settings::GameState m_state;
+    QTimer *gameSceneTimer;
     int m_score;
     int m_lives;
     int m_health;
     int m_waveCount;
     QGraphicsView *view;
     InputHandler *m_inputHandler;
-    GameMenu *startMenuScene;
-    GameMenu *pauseMenuScene;
-    GameMenu *gameOverMenuScene;
-    GameMenu *gameScene;
+    MenuScene *startMenuScene;
+    MenuScene *pauseMenuScene;
+    MenuScene *gameOverMenuScene;
+    GameScene *gameScene;
+    BackgroundMusic *m_bgMusic;
     Player *player;
     SpawnHandler *spawnHandler;
-    BackgroundMusic *bgMusic;
 
     void setupView();
     void setupMainMenuScene();
@@ -63,6 +60,5 @@ namespace metodik_invaders2 {
     void setupGameScene();
     void setupGameBackground();
   };
-
 } // namespace metodik_invaders2
 #endif // METODIK_INVADERS2_GAME_H
