@@ -48,8 +48,8 @@ namespace metodik_invaders2 {
     MenuScene *startMenuScene;
     MenuScene *pauseMenuScene;
     MenuScene *gameOverMenuScene;
-    GameScene *gameScene;
     BackgroundMusic *m_bgMusic;
+    GameScene *gameScene;
     Player *player;
     SpawnHandler *spawnHandler;
 

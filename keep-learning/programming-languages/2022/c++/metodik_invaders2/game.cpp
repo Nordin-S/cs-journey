@@ -22,14 +22,9 @@ namespace metodik_invaders2 {
       startMenuScene(new MenuScene(this)),
       pauseMenuScene(new MenuScene(this)),
       gameOverMenuScene(new MenuScene(this)),
-      gameScene(new GameScene(this)),
       m_bgMusic(new BackgroundMusic(this)) {
 
     setupView();
-    gameScene->setSceneRect(0, 0, view->width(), view->height());
-    pauseMenuScene->setSceneRect(0, 0, view->width(), view->height());
-    gameOverMenuScene->setSceneRect(0, 0, view->width(), view->height());
-    startMenuScene->setSceneRect(0, 0, view->width(), view->height());
 
     setupMainMenuScene();
     setupPauseMenuScene();
@@ -46,8 +41,12 @@ namespace metodik_invaders2 {
     delete player;
     delete m_bgMusic;
     delete spawnHandler;
-    delete view;
     delete gameScene;
+    delete pauseMenuScene;
+    delete gameOverMenuScene;
+    delete startMenuScene;
+    delete m_inputHandler;
+    delete view;
   }
 
   void Game::setupView() {
@@ -105,6 +104,7 @@ namespace metodik_invaders2 {
   }
 
   void Game::setupMainMenuScene() {
+    startMenuScene->setSceneRect(0, 0, view->width(), view->height());
     // Create backgrounds and add it to this scene
     auto *bgUniverse = new Background(1, 100, {":/resources/bg/nebulaRed.png"});
     auto *bgStars1 = new Background(1, 80, {":/resources/bg/starsSmall1.png"});
@@ -135,12 +135,72 @@ namespace metodik_invaders2 {
   }
 
   void Game::setupPauseMenuScene() {
+    pauseMenuScene->setSceneRect(0, 0, view->width(), view->height());
+    // Create backgrounds and add it to this scene
+    auto *bgUniverse = new Background(1, 100, {":/resources/bg/nebulaBlue.png"});
+    auto *bgStars1 = new Background(1, 80, {":/resources/bg/starsSmall1.png"});
+    auto *bgStars2 = new Background(1, 60, {":/resources/bg/starsSmall2.png"});
+
+    pauseMenuScene->addBackground(bgUniverse);
+    pauseMenuScene->addBackground(bgStars1);
+    pauseMenuScene->addBackground(bgStars2);
+
+    //TODO: add a pause menu image
+    pauseMenuScene->setTitleImg(":/resources/ui/spaceInvasion.png");
+
+    // Create resume button
+    auto *resumeBtn = new MenuButton(
+      QPixmap(":/resources/ui/resumeGame.png"),
+      QPixmap(":/resources/ui/resumeGame_active.png"));
+    pauseMenuScene->addButton(resumeBtn);
+    connect(resumeBtn, &MenuButton::clicked, this, &Game::showGameScene);
+
+    // Create the quit button
+    auto *quitBtn = new MenuButton(
+      QPixmap(":/resources/ui/quitGame.png"),
+      QPixmap(":/resources/ui/quitGame_active.png"));
+    pauseMenuScene->addButton(quitBtn);
+    connect(quitBtn, &MenuButton::clicked, this,
+            []() { QApplication::quit(); });
+
+    pauseMenuScene->buildScene();
   }
 
   void Game::setupGameOverMenuScene() {
+    gameOverMenuScene->setSceneRect(0, 0, view->width(), view->height());
+    // Create backgrounds and add it to this scene
+    auto *bgUniverse = new Background(1, 100, {":/resources/bg/nebulaRed.png"});
+    auto *bgStars1 = new Background(1, 80, {":/resources/bg/starsSmall1.png"});
+    auto *bgStars2 = new Background(1, 60, {":/resources/bg/starsSmall2.png"});
+
+    gameOverMenuScene->addBackground(bgUniverse);
+    gameOverMenuScene->addBackground(bgStars1);
+    gameOverMenuScene->addBackground(bgStars2);
+
+    //TODO: add a gameOver menu image
+    gameOverMenuScene->setTitleImg(":/resources/ui/spaceInvasion.png");
+
+    // Create resume button
+    auto *retryBtn = new MenuButton(
+      QPixmap(":/resources/ui/retryGame.png"),
+      QPixmap(":/resources/ui/retryGame_active.png"));
+    gameOverMenuScene->addButton(retryBtn);
+    connect(retryBtn, &MenuButton::clicked, this, &Game::retryGame);
+
+    // Create the quit button
+    auto *quitBtn = new MenuButton(
+      QPixmap(":/resources/ui/quitGame.png"),
+      QPixmap(":/resources/ui/quitGame_active.png"));
+    gameOverMenuScene->addButton(quitBtn);
+    connect(quitBtn, &MenuButton::clicked, this,
+            []() { QApplication::quit(); });
+
+    gameOverMenuScene->buildScene();
   }
 
   void Game::setupGameScene() {
+    gameScene = new GameScene(this);
+    gameScene->setSceneRect(0, 0, view->width(), view->height());
     setupGameBackground();
 
     // Create a gameSceneTimer for the game loop
