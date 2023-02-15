@@ -13,14 +13,29 @@
 
 namespace metodik_invaders2 {
 
+  /**
+   * @brief The Game class
+   * This class is the main class of the game. It is responsible for the game state and the game loop.
+   */
   class Game : public QObject {
   Q_OBJECT
 
   public:
+    /**
+     * @brief Game
+     */
     Game();
 
+    /**
+     * @brief startGame
+     * This method starts the game loop.
+     */
     void setState(settings::GameState state);
 
+    /**
+     * @brief getState
+     * @return the current game state
+     */
     settings::GameState getState() const;
 
     ~Game();
@@ -30,10 +45,35 @@ namespace metodik_invaders2 {
 //    QSet<int> pressedKeys;
 
   public slots:
+
+    /**
+     * @brief showGameScene
+     * This method shows the game scene.
+     */
     void showGameScene();
+
+    /**
+     * @brief showPauseScene
+     * This method shows the start menu scene.
+     */
     void showPauseScene();
+
+    /**
+     * @brief retryGame
+     * This method shows the game over scene.
+     */
     void retryGame();
+
+    /**
+     * @brief showGameOverScene
+     * This method quits the game.
+     */
     void showGameOverScene();
+
+    /**
+     * @brief showStartMenuScene
+     * This method shows the start menu scene.
+     */
     void showStartMenuScene();
 
   private:
@@ -53,12 +93,47 @@ namespace metodik_invaders2 {
     Player *player;
     SpawnHandler *spawnHandler;
 
+    /**
+     * @brief setupView
+     * This method sets up the view.
+     */
     void setupView();
+
+    /**
+     * @brief setupStartMenuScene
+     * This method sets up the start menu scene.
+     */
     void setupMainMenuScene();
+
+    /**
+     * @brief setupPauseMenuScene
+     * This method sets up the pause menu scene.
+     */
     void setupPauseMenuScene();
+
+    /**
+     * @brief setupGameOverMenuScene
+     * This method sets up the game over menu scene.
+     */
     void setupGameOverMenuScene();
+
+    /**
+     * @brief setupGameScene
+     * This method sets up the game scene.
+     */
     void setupGameScene();
+
+    /**
+     * @brief setupGameBackground
+     * This method sets up the game background.
+     */
     void setupGameBackground();
+
+    /**
+     * @brief makeConnections
+     * This method sets up the game scene timer.
+     */
+    void makeConnections();
   };
 } // namespace metodik_invaders2
 #endif // METODIK_INVADERS2_GAME_H

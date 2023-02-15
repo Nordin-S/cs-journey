@@ -13,12 +13,14 @@ namespace metodik_invaders2 {
   class InputHandler : public QObject {
   Q_OBJECT
   public:
-    InputHandler(QObject *parent = nullptr);
+    explicit InputHandler(QObject *parent = nullptr);
     ~InputHandler() = default;
 
-  protected:
-    virtual void keyPressEvent(QKeyEvent *event);
-    virtual void keyReleaseEvent(QKeyEvent *event);
+    // event filter
+    bool eventFilter(QObject *obj, QEvent *event) override;
+
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 
     signals:
     void moveLeftDown();

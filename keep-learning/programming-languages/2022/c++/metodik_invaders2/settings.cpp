@@ -55,4 +55,7 @@ namespace metodik_invaders2 {
     std::sort(animList.begin(), animList.end());
     return animList;
   }
+  bool settings::randomBool() {
+    return rand() > (RAND_MAX / 2);
+  }
 }

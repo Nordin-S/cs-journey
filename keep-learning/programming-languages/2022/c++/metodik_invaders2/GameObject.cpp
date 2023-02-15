@@ -1,25 +1,14 @@
 #include "GameObject.h"
 
 namespace metodik_invaders2 {
-  GameObject::GameObject(int speed, QObject *parent) {
+  GameObject::GameObject(int moveStep, int moveUpdate, QObject *parent)
+    : QObject(parent),
+      m_moveStep(moveStep), m_moveUpdate(moveUpdate) {}
 
-  }
 
-  settings::Faction GameObject::getFaction() {
-    return settings::Faction::GameObject;
-  }
-
-  void GameObject::setPosition(qreal xPos, qreal yPos) {
+  void GameObject::setStartPosition(qreal xPos, qreal yPos) {
     // position based on center of pixmap
     this->setPos(xPos - pixmap().width() / 2,
-           yPos - pixmap().height() - pixmap().height() / 2);
-  }
-
-  void GameObject::setDirectionX(int xDirection) {
-    this->xDirection = xDirection;
-  }
-
-  void GameObject::setDirectionY(int yDirection) {
-    this->yDirection = yDirection;
+                 yPos - pixmap().height() - pixmap().height() / 2);
   }
 } // metodik_invaders2

@@ -4,6 +4,7 @@
 
 #include <QObject>
 #include "GameScene.h"
+#include "GameObject.h"
 
 namespace metodik_invaders2 {
   GameScene::GameScene(QObject *parent) : SceneMaker(parent) {}
@@ -12,7 +13,7 @@ namespace metodik_invaders2 {
     m_healthBar = new QGraphicsPixmapItem(
       QPixmap(":/resources/ui/health100.png"));
     m_scoreBar = new QGraphicsPixmapItem(QPixmap(":/resources/ui/score.png"));
-    m_scoreText = new QGraphicsTextItem("10000");
+    m_scoreText = new QGraphicsTextItem("0");
     int edgeOffsetX = 10;
     int edgeOffsetY = 10;
     int fontPointSize = 32;
@@ -40,18 +41,34 @@ namespace metodik_invaders2 {
     // call base class activate
     SceneMaker::activate();
     // do other stuff if needed
+    for (auto &item : items()) {
+      auto *pauseable = dynamic_cast<GameObject *>(item);
+      if (pauseable) {
+        pauseable->pauseState(false);
+      }
+    }
   }
 
   void GameScene::deactivate() {
     // call base class deactivate
     SceneMaker::deactivate();
     // do other stuff if needed
+    // loop through all items in scene and set pauseState
+    for (auto &item : items()) {
+      auto *pauseable = dynamic_cast<GameObject *>(item);
+      if (pauseable) {
+        pauseable->pauseState(true);
+      }
+    }
   }
 
   GameScene::~GameScene() {
     delete m_healthBar;
     delete m_scoreBar;
     delete m_scoreText;
+    for (auto &item : items()) {
+        delete item;
+    }
   }
 
   void GameScene::updateScore(int score) {

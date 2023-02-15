@@ -1,5 +1,4 @@
 #include "game.h"
-#include "spacecraft.h"
 #include "background.h"
 #include "backgroundmusic.h"
 #include "player.h"
@@ -7,7 +6,6 @@
 #include "GameScene.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
-#include <QTimer>
 #include <QApplication>
 
 namespace metodik_invaders2 {
@@ -15,7 +13,7 @@ namespace metodik_invaders2 {
     : m_state(settings::GameState::MAIN_MENU),
       m_score(0),
       m_lives(3),
-      m_health(100),
+      m_health(settings::PlayerHealth),
       m_waveCount(0),
       view(new QGraphicsView()),
       m_inputHandler(new InputHandler()),
@@ -32,21 +30,6 @@ namespace metodik_invaders2 {
     setupGameScene();
 
     showStartMenuScene();
-
-    connect(m_inputHandler, &InputHandler::pausePressed, this,
-            &Game::showPauseScene);
-  }
-
-  Game::~Game() {
-    delete player;
-    delete m_bgMusic;
-    delete spawnHandler;
-    delete gameScene;
-    delete pauseMenuScene;
-    delete gameOverMenuScene;
-    delete startMenuScene;
-    delete m_inputHandler;
-    delete view;
   }
 
   void Game::setupView() {
@@ -61,9 +44,7 @@ namespace metodik_invaders2 {
     view->setRenderHint(QPainter::SmoothPixmapTransform);
     view->setRenderHint(QPainter::TextAntialiasing);
 
-//    view->setFixedSize(800, 1000);
-//    view->setSceneRect(400, 200, 800, 1000);
-//    view->showMaximized();
+    // size of view
     view->setFixedSize(QApplication::primaryScreen()->size());
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -71,8 +52,10 @@ namespace metodik_invaders2 {
     // Show the view
     view->setFocus();
     view->activateWindow();
-    view->installEventFilter(m_inputHandler);
     view->showFullScreen();
+
+    // send events to inputHandler
+    view->installEventFilter(m_inputHandler);
   }
 
   void Game::setupGameBackground() {
@@ -82,8 +65,10 @@ namespace metodik_invaders2 {
     auto *galaxies = new Background(1, 90,
                                     {":/resources/bg/galaxies01.png",
                                      ":/resources/bg/galaxies02.png"});
-    auto *bgStars1 = new Background(1, 80, {":/resources/bg/starsSmall1.png"});
-    auto *bgStars2 = new Background(1, 60, {":/resources/bg/starsSmall2.png"});
+    auto *bgStars1 = new Background(1, 80,
+                                    {":/resources/bg/starsSmall1.png"});
+    auto *bgStars2 = new Background(1, 60,
+                                    {":/resources/bg/starsSmall2.png"});
 
     QList<QString> planetSlides = {":/resources/bg/planets01.png",
                                    ":/resources/bg/planets02.png",
@@ -106,9 +91,12 @@ namespace metodik_invaders2 {
   void Game::setupMainMenuScene() {
     startMenuScene->setSceneRect(0, 0, view->width(), view->height());
     // Create backgrounds and add it to this scene
-    auto *bgUniverse = new Background(1, 100, {":/resources/bg/nebulaRed.png"});
-    auto *bgStars1 = new Background(1, 80, {":/resources/bg/starsSmall1.png"});
-    auto *bgStars2 = new Background(1, 60, {":/resources/bg/starsSmall2.png"});
+    auto *bgUniverse = new Background(1, 100,
+                                      {":/resources/bg/nebulaRed.png"});
+    auto *bgStars1 = new Background(1, 80,
+                                    {":/resources/bg/starsSmall1.png"});
+    auto *bgStars2 = new Background(1, 60,
+                                    {":/resources/bg/starsSmall2.png"});
 
     startMenuScene->addBackground(bgUniverse);
     startMenuScene->addBackground(bgStars1);
@@ -137,9 +125,12 @@ namespace metodik_invaders2 {
   void Game::setupPauseMenuScene() {
     pauseMenuScene->setSceneRect(0, 0, view->width(), view->height());
     // Create backgrounds and add it to this scene
-    auto *bgUniverse = new Background(1, 100, {":/resources/bg/nebulaBlue.png"});
-    auto *bgStars1 = new Background(1, 80, {":/resources/bg/starsSmall1.png"});
-    auto *bgStars2 = new Background(1, 60, {":/resources/bg/starsSmall2.png"});
+    auto *bgUniverse = new Background(1, 100,
+                                      {":/resources/bg/nebulaBlue.png"});
+    auto *bgStars1 = new Background(1, 80,
+                                    {":/resources/bg/starsSmall1.png"});
+    auto *bgStars2 = new Background(1, 60,
+                                    {":/resources/bg/starsSmall2.png"});
 
     pauseMenuScene->addBackground(bgUniverse);
     pauseMenuScene->addBackground(bgStars1);
@@ -150,8 +141,8 @@ namespace metodik_invaders2 {
 
     // Create resume button
     auto *resumeBtn = new MenuButton(
-      QPixmap(":/resources/ui/resumeGame.png"),
-      QPixmap(":/resources/ui/resumeGame_active.png"));
+      QPixmap(":/resources/ui/resume.png"),
+      QPixmap(":/resources/ui/resume_active.png"));
     pauseMenuScene->addButton(resumeBtn);
     connect(resumeBtn, &MenuButton::clicked, this, &Game::showGameScene);
 
@@ -169,21 +160,24 @@ namespace metodik_invaders2 {
   void Game::setupGameOverMenuScene() {
     gameOverMenuScene->setSceneRect(0, 0, view->width(), view->height());
     // Create backgrounds and add it to this scene
-    auto *bgUniverse = new Background(1, 100, {":/resources/bg/nebulaRed.png"});
-    auto *bgStars1 = new Background(1, 80, {":/resources/bg/starsSmall1.png"});
-    auto *bgStars2 = new Background(1, 60, {":/resources/bg/starsSmall2.png"});
+    auto *bgUniverse = new Background(1, 100,
+                                      {":/resources/bg/nebulaRed.png"});
+    auto *bgStars1 = new Background(1, 80,
+                                    {":/resources/bg/starsSmall1.png"});
+    auto *bgStars2 = new Background(1, 60,
+                                    {":/resources/bg/starsSmall2.png"});
 
     gameOverMenuScene->addBackground(bgUniverse);
     gameOverMenuScene->addBackground(bgStars1);
     gameOverMenuScene->addBackground(bgStars2);
 
     //TODO: add a gameOver menu image
-    gameOverMenuScene->setTitleImg(":/resources/ui/spaceInvasion.png");
+    gameOverMenuScene->setTitleImg(":/resources/ui/gameOver.png");
 
     // Create resume button
     auto *retryBtn = new MenuButton(
-      QPixmap(":/resources/ui/retryGame.png"),
-      QPixmap(":/resources/ui/retryGame_active.png"));
+      QPixmap(":/resources/ui/retry.png"),
+      QPixmap(":/resources/ui/retry_active.png"));
     gameOverMenuScene->addButton(retryBtn);
     connect(retryBtn, &MenuButton::clicked, this, &Game::retryGame);
 
@@ -203,36 +197,41 @@ namespace metodik_invaders2 {
     gameScene->setSceneRect(0, 0, view->width(), view->height());
     setupGameBackground();
 
-    // Create a gameSceneTimer for the game loop
-    gameSceneTimer = new QTimer();
-    connect(gameSceneTimer, SIGNAL(timeout()), gameScene, SLOT(advance()));
-    connect(gameSceneTimer, SIGNAL(timeout()), gameScene, SLOT(update()));
+    m_score = 0;
+    m_health = settings::Healths::PlayerHealth;
+    m_lives = 0;
 
     // Create a new player and add it to the gameScene
     player = new Player(settings::ShipSpeeds::PlayerSpeed,
+                        settings::UpdateMs::UMs20,
                         settings::Healths::PlayerHealth,
                         settings::UpdateMs::UMs200,
                         settings::MoveSteps::Move01,
                         settings::AmmoType::TypeLaser,
                         settings::AmmoDmgLvl::Dmg10,
+                        settings::Faction::Player,
+                        settings::ShipClass::Fighter,
                         settings::ShipTypes::Striker,
                         this);
     gameScene->addItem(player);
-    player->setPosition(gameScene->width() / 2, gameScene->height() - 200);
+    player->setStartPosition(gameScene->width() / 2,
+                             gameScene->height() - 200);
     player->setZValue(std::numeric_limits<qreal>::max());
 
-    spawnHandler = new SpawnHandler(100, gameScene, this);
+    spawnHandler = new SpawnHandler(m_score, gameScene, this);
 
     gameScene->buildScene();
+
+    // connections for the gameScene, player and spawnHandler, etc.
+    makeConnections();
   }
 
   void Game::showStartMenuScene() {
     m_state = settings::GameState::MAIN_MENU;
-    m_bgMusic->setMusicPath("qrc:/resources/music/menuMusic01.mp3");
+    m_bgMusic->setMusicPath("qrc:/resources/music/menu01.mp3");
+    m_bgMusic->play();
     view->setScene(startMenuScene);
     startMenuScene->activate();
-    m_bgMusic->play();
-    gameSceneTimer->stop();
   }
 
   void Game::showGameScene() {
@@ -240,32 +239,140 @@ namespace metodik_invaders2 {
     pauseMenuScene->deactivate();
     gameOverMenuScene->deactivate();
     m_bgMusic->setMusicPath("qrc:/resources/music/playTime01.mp3");
+    m_bgMusic->play();
     view->setScene(gameScene);
     gameScene->activate();
-    gameSceneTimer->start(1000 / 60);
   }
 
   void Game::showPauseScene() {
     m_state = settings::GameState::PAUSED;
     gameScene->deactivate();
     gameOverMenuScene->deactivate();
-    m_bgMusic->setMusicPath("qrc:/resources/music/menuMusic01.mp3");
+    m_bgMusic->setMusicPath("qrc:/resources/music/menu01.mp3");
+    m_bgMusic->play();
     view->setScene(pauseMenuScene);
     pauseMenuScene->activate();
-    gameSceneTimer->stop();
   }
 
   void Game::showGameOverScene() {
     m_state = settings::GameState::GAME_OVER;
     gameScene->deactivate();
-    pauseMenuScene->deactivate();
+    delete player;
+    delete spawnHandler;
+    delete gameScene;
+    gameOverMenuScene->activate();
     m_bgMusic->setMusicPath("qrc:/resources/music/gameOver01.mp3");
+    m_bgMusic->play();
     view->setScene(gameOverMenuScene);
-    gameSceneTimer->stop();
   }
 
   void Game::retryGame() {
     setupGameScene();
     showGameScene();
+  }
+
+  void Game::makeConnections() {
+
+    connect(m_inputHandler, &InputHandler::pausePressed, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        showPauseScene();
+      } else if (m_state == settings::GameState::PAUSED) {
+        showGameScene();
+      }
+    });
+    connect(m_inputHandler, &InputHandler::shootDown, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setShooting(true);
+      }
+    });
+    connect(m_inputHandler, &InputHandler::shootUp, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setShooting(false);
+      }
+    });
+    connect(m_inputHandler, &InputHandler::moveLeftDown, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setDirectionX(-1);
+      }
+    });
+    connect(m_inputHandler, &InputHandler::moveLeftUp, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setDirectionX(0);
+      }
+    });
+    connect(m_inputHandler, &InputHandler::moveRightDown, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setDirectionX(1);
+      }
+    });
+    connect(m_inputHandler, &InputHandler::moveRightUp, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setDirectionX(0);
+      }
+    });
+    connect(m_inputHandler, &InputHandler::moveUpDown, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setDirectionY(-1);
+      }
+    });
+    connect(m_inputHandler, &InputHandler::moveUpUp, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setDirectionY(0);
+      }
+    });
+    connect(m_inputHandler, &InputHandler::moveDownDown, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setDirectionY(1);
+      }
+    });
+    connect(m_inputHandler, &InputHandler::moveDownUp, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        player->setDirectionY(0);
+      }
+    });
+    connect(player, &Player::bulletHitSignal, this, [this]() {
+      m_health = player->getHealth();
+      gameScene->updateHealth(m_health);
+      if (m_health <= 0 && m_state == settings::GameState::RUNNING) {
+        showGameOverScene();
+      }
+    });
+    connect(player, &Player::explodingSignal, this, [this]() {
+      if (m_state == settings::GameState::RUNNING) {
+        m_health = 0;
+        gameScene->updateHealth(m_health);
+        showGameOverScene();
+      }
+    });
+    connect(spawnHandler, &SpawnHandler::enemyDiedSignal, this,
+            [this](settings::ShipClass enemyClass) {
+              switch (enemyClass) {
+                case settings::ShipClass::Fighter:
+                  m_score += settings::ClassKilledScore::FighterScore;
+                  break;
+                case settings::ShipClass::Bomber:
+                  m_score += settings::ClassKilledScore::BomberScore;
+                  break;
+                case settings::ShipClass::Boss:
+                  m_score += settings::ClassKilledScore::BossScore;
+                  break;
+                default:
+                  m_score += settings::ClassKilledScore::FighterScore;
+                  break;
+              }
+              spawnHandler->setPlayerScore(m_score);
+              gameScene->updateScore(m_score);
+            });
+  }
+  Game::~Game() {
+    delete player;
+    delete m_bgMusic;
+    delete spawnHandler;
+    delete gameScene;
+    delete pauseMenuScene;
+    delete gameOverMenuScene;
+    delete startMenuScene;
+    delete m_inputHandler;
+    delete view;
   }
 } // namespace metodik_invaders2

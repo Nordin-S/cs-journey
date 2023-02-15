@@ -10,14 +10,30 @@
 
 namespace metodik_invaders2 {
 
+  /**
+   * @brief The BackgroundPixmapItem class
+   * This class is a QGraphicsPixmapItem that overrides the shape() method to
+   * prevent collision detection.
+   */
   class BackgroundPixmapItem : public QObject, public QGraphicsPixmapItem {
   Q_OBJECT
   public:
+    /**
+     * @brief BackgroundPixmapItem constructor
+     */
     BackgroundPixmapItem() = default;
 
+    /**
+     * @brief ~BackgroundPixmapItem destructor
+     */
     ~BackgroundPixmapItem() override = default;
   protected:
-    // override shape to prevent collision detection
+    /**
+     * @brief shape
+     * This method overrides the shape() method of QGraphicsPixmapItem to
+     * prevent collision detection.
+     * @return
+     */
     QPainterPath shape() const override {
       return *new QPainterPath();
     }

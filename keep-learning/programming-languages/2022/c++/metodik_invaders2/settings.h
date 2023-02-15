@@ -18,12 +18,12 @@ namespace metodik_invaders2 {
     };
     enum Healths {
       PlayerHealth = 100,
-      FighterHealth = 50,
-      BomberHealth = 250,
-      BossHealth = 500
+      FighterHealth = 30,
+      BomberHealth = 150,
+      BossHealth = 400
     };
     enum ShipSpeeds {
-      PlayerSpeed = 10, FighterSpeed = 8, BomberSpeed = 6, BossSpeed = 4
+      PlayerSpeed = 18, FighterSpeed = 13, BomberSpeed = 6, BossSpeed = 2
     };
     enum UpdateMs {
       UMs01 = 1,
@@ -52,6 +52,13 @@ namespace metodik_invaders2 {
       UMs150 = 150,
       UMs200 = 200,
       UMs300 = 300,
+      UMs400 = 400,
+      UMs500 = 500,
+      UMs600 = 600,
+      UMs700 = 700,
+      UMs800 = 800,
+      UMs900 = 900,
+      UMs1000 = 1000,
     };
     enum MoveSteps {
       Move01 = 1,
@@ -100,11 +107,20 @@ namespace metodik_invaders2 {
       Dmg07,
       Dmg08,
       Dmg09,
-      Dmg10
+      Dmg10,
+      Dmg20 = 20,
+      Dmg30,
+      Dmg40,
+      Dmg50,
     };
 
-    enum EnemyShipType {
+    enum ShipClass {
       Fighter, Bomber, Boss
+    };
+    enum ClassKilledScore {
+      FighterScore = 10,
+      BomberScore = 100,
+      BossScore = 500
     };
 
     enum ShipTypes {
@@ -303,6 +319,7 @@ namespace metodik_invaders2 {
 
     extern QList<QString>
     getShipAnimation(ShipTypes shipType, AnimationStates animState);
+    extern bool randomBool();
   }; // metodik_invaders2
 }
 #endif //METODIK_INVADERS2_SETTINGS// _H

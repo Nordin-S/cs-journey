@@ -1,8 +1,7 @@
-#include "background.h"
-#include "BackgroundPixmapItem.h"
-
 #include <QTimer>
 #include <QGraphicsScene>
+#include "background.h"
+#include "BackgroundPixmapItem.h"
 
 namespace metodik_invaders2 {
   Background::Background(int speed, int updateSpeed, QList<QString> imgPaths,
@@ -11,12 +10,15 @@ namespace metodik_invaders2 {
       m_images(imgPaths) {
     const int NUM_IMAGES = 3; // TODO: two should be enough!?
 
+    // Load the image
     if (m_images.size() > 1){
+      // Load a random image if there are more than one
       m_image.load(m_images[rand() % m_images.size()]);
     } else {
       m_image.load(imgPaths[0]);
     }
 
+    // Create the instances of the background, and set them up to be moved
     for (int i = 0; i < NUM_IMAGES; i++) {
       auto *instance = new BackgroundPixmapItem();
       instance->setPixmap(m_image);
@@ -26,14 +28,12 @@ namespace metodik_invaders2 {
       instance->setData(0, false);
     }
 
-//    setData(0, false); // TODO: do we need this?
-
     m_backgroundTimer = new QTimer();
     connect(m_backgroundTimer, SIGNAL(timeout()), this, SLOT(move()));
-//    m_backgroundTimer->start(m_updateSpeed);
   }
 
   void Background::move() {
+    /* Move the background down and reset it if it goes out of the screen */
     for (int i = 0; i < m_instances.size(); i++) {
       m_instances[i]->setPos(0, m_instances[i]->y() + m_speed);
       if (m_instances[i]->y() > m_image.height()) {

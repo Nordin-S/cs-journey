@@ -25,20 +25,26 @@ namespace metodik_invaders2 {
     void setMiniBossSpawnThreshold(const int &miniBossSpawnThreshold);
 
     void setBossSpawnThreshold(const int &bossSpawnThreshold);
+
+    // get random enemy ship type given ship class
+    settings::ShipTypes getRandomEnemyShipType(settings::ShipClass shipClass);
   signals:
     void spawnRandomEnemySignal();
     void spawnFormationSignal();
     void spawnMiniBossSignal();
     void spawnBossSignal();
     void setPlayerScoreSignal(const int &playerScore);
-    void togglePauseSignal( );
+    void togglePauseSignal();
+    void enemyDiedSignal(settings::ShipClass enemyShipClass);
+
 
   public slots:
     void setPlayerScore(const int &playerScore);
-    void spawnRandomEnemyHandler();
+    void spawnRandomHandler();
     void spawnFormationHandler();
     void spawnMiniBossHandler();
     void spawnBossHandler();
+    void enemyDiedHandler(settings::ShipClass enemyShipClass);
 
   private:
     int m_playerScore;
@@ -46,11 +52,15 @@ namespace metodik_invaders2 {
     int m_formationSpawnThreshold;
     int m_miniBossSpawnThreshold;
     int m_bossSpawnThreshold;
+    bool m_waitSpecialSpawn = false;
 
+    QTimer *m_randomSpawnTimer;
     QTimer *m_formationSpawnTimer;
     QTimer *m_miniBossSpawnTimer;
     QTimer *m_bossSpawnTimer;
     QGraphicsScene *m_scene;
+
+    int randomPosX() const;
   };
 } // metodik_invaders2
 

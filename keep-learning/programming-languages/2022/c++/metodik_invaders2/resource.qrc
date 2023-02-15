@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/bg/menuBg.gif</file>
         <file>resources/lasers/laserSmall01.png</file>
         <file>resources/lasers/laserSmall02.png</file>
         <file>resources/lasers/laserSmall03.png</file>
@@ -70,7 +69,6 @@
         <file>resources/ui/retry.png</file>
         <file>resources/ui/retry_active.png</file>
         <file>resources/ui/score.png</file>
-        <file>resources/ui/menuBg.mp4</file>
 
         <file>resources/ships/striker/cruising/striker_cruising_00.png</file>
         <file>resources/ships/striker/cruising/striker_cruising_01.png</file>

@@ -7,6 +7,17 @@
 namespace metodik_invaders2 {
   InputHandler::InputHandler(QObject *parent) : QObject(parent) {}
 
+  bool InputHandler::eventFilter(QObject *obj, QEvent *event) {
+    if (event->type() == QEvent::KeyPress) {
+      keyPressEvent(dynamic_cast<QKeyEvent *>(event));
+      return true;
+    } else if (event->type() == QEvent::KeyRelease) {
+      keyReleaseEvent(dynamic_cast<QKeyEvent *>(event));
+      return true;
+    } else
+      return QObject::eventFilter(obj, event);
+  }
+
   void InputHandler::keyPressEvent(QKeyEvent *event) {
     if (event->key() == Qt::Key_Left) {
 //      player->setDirectionX(-1);
@@ -55,4 +66,5 @@ namespace metodik_invaders2 {
       emit pausePressed();
     }
   }
+
 } // metodik_invaders2

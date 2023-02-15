@@ -1,6 +1,4 @@
-//
-// Created by nordi on 2/6/2023.
-//
+// copyrigth: Nordin Suleimani 14/2/2023
 
 #ifndef METODIK_INVADERS2_MENUSCENE_H
 #define METODIK_INVADERS2_MENUSCENE_H
@@ -11,6 +9,15 @@
 #include "SceneMaker.h"
 
 namespace metodik_invaders2 {
+
+  /**
+   * @Author: Nordin Suleimani 14/2/2023
+   * @file MenuScene.h
+   * @class MenuScene
+   * @brief The MenuScene class
+   * @details This class is responsible for creating the main menu scene.
+   * It is a subclass of SceneMaker.
+   */
   class MenuScene : public SceneMaker {
   Q_OBJECT
   public:
