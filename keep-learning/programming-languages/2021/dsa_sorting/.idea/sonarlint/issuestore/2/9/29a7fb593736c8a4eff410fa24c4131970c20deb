@@ -1,0 +1,6 @@
+
+Œ	cpp:S5276-"kimplicit conversion from 'std::vector::size_type' (aka 'unsigned long long') to 'double' may lose precision(µ’êşÿÿÿÿ8ùŠœË×0
+n	cpp:S5205"MReplace this function pointer with a template parameter or a "std::function".(Ìïİìüÿÿÿÿ8ºŒœË×0
+a	cpp:S1238"@Pass expensive to copy object "sort_name" by reference to const.(Ä·âáøÿÿÿÿ8ºŒœË×0
+a	cpp:S1238"@Pass expensive to copy object "data_name" by reference to const.(Ä·âáøÿÿÿÿ8»ŒœË×0
+gcpp:S107"GThis function has 8 parameters, which is greater than the 7 authorized.(Ìïİìüÿÿÿÿ8¾ŒœË×0
